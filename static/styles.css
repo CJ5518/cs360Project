@@ -1,0 +1,12 @@
+* {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-list {
+	list-style-type: none; /* Remove bullets */
+}
+
+.nav-list li {
+	padding: 10px 10px;
+	display:inline;
+}

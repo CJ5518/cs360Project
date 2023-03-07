@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= page_title or "MyHome" %></title>
+	<link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+	<% content_for("inner") %>
+</body>
+</html>

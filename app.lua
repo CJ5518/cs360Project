@@ -1,8 +1,18 @@
-local lapis = require("lapis")
-local app = lapis.Application()
+local lapis = require("lapis");
+local app = lapis.Application();
+app:enable("etlua");
+app.layout = require "views.layout"
 
-app:get("/", function()
-  return "Welcome to Lapis " .. require("lapis.version")
+app:get("index", "/", function()
+	return {render = "index"};
 end)
 
-return app
+app:get("dashboard", "/dashboard", function()
+	return {render = "dashboard"};
+end)
+
+app:get("serviceCalc", "/servicecalculator", function()
+	return {render = "serviceCalc"};
+end)
+
+return app;
