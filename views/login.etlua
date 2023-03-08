@@ -1,5 +1,13 @@
 <% render("widgets.nav") %>
+<h1>MyHome Login</h1>
 
-<h1>MyHome</h1>
+<input type="radio" checked id="html" name="fav_language" value="User">
+<label for="html">User</label><br>
+<input type="radio" id="css" name="fav_language" value="Vendor">
+<label for="css">Vendor</label><br>
 
-<p>Your solution for buying and selling services related to your home</p>
+Email: 
+<input type="email">
+<br>
+Password: <input type = "password"><br>
+<input type="submit">
