@@ -7,10 +7,6 @@ app:get("index", "/", function()
 	return {render = "index"};
 end)
 
-app:get("dashboard", "/dashboard", function()
-	return {render = "dashboard"};
-end)
-
 app:match("/:page", function(self)
 	return {render = self.params.page};
   end)
