@@ -11,20 +11,8 @@ app:get("dashboard", "/dashboard", function()
 	return {render = "dashboard"};
 end)
 
-app:get("serviceCalc", "/servicecalculator", function()
-	return {render = "serviceCalc"};
-end)
-
-app:get("login", "/login", function()
-	return {render = "login"};
-end)
-
-app:get("signup", "/signup", function()
-	return {render = "signup"};
-end)
-
-app:get("signupUser", "/signupUser", function()
-	return {render = "signupUser"};
-end)
+app:match("/:page", function(self)
+	return {render = self.params.page};
+  end)
 
 return app;

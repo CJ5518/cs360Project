@@ -7,13 +7,19 @@ local links = {
 	{"Service Calculator", "serviceCalc"}
 }
 
+local modeIsDev = true;
+
 function nav_mt:content()
 	div({class = "navigation"}, function() 
 		div({class = "nav-inner"}, function() 
 			ul({class = "nav-list"}, function()
 				for q = 1, #links do
-					li(function() 
-						a({href=self:url_for(links[q][2])}, links[q][1]);
+					li(function()
+						if not modeIsDev then 
+							a({href=self:url_for(links[q][2])}, links[q][1]);
+						else 
+							a({href="/" .. (links[q][2])}, links[q][1]);
+						end
 					end)
 				end
 			end)
