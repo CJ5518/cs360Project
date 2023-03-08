@@ -11,6 +11,9 @@
 	display:inline;
 }
 
+
+/* index */
+
 .thick-button {
 	border: 0.065mm;
 	color: white;
@@ -34,3 +37,5 @@ a.unstyled {
 	display:inline;
 	padding: 20px;
 }
+
+/* service box widget */

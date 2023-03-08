@@ -1,4 +1,5 @@
-<% render("widgets.nav") %>
+<% render("widgets.nav");%>
 
-<h1>MyHome</h1>
+<%local serviceBox = require("widgets.serviceBox");%>
 
+<h1>Hello, Randal Graves</h1>

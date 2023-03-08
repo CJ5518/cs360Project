@@ -4,7 +4,9 @@ local nav, nav_mt = Widget:extend("nav")
 
 local links = {
 	{"Dashboard", "dashboard"},
-	{"Service Calculator", "serviceCalc"}
+	{"Service Calculator", "serviceCalc"},
+	{"Affordability Calculator", "affordCalc"},
+	{"Service Search", "serviceSearch"}
 }
 
 local modeIsDev = true;
