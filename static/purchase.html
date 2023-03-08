@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Purchase</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            .col {
+                float: left;
+                width: 50%;
+            }
+
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            
+            .service-box-list {
+                list-style-type: none; /* Remove bullets */
+            }
+
+            .service-box {
+                border:1px solid black;
+                width: 200px;
+            }
+            
+            .bot {
+                text-align: center;
+                padding-right: 500px;
+            }
+
+        </style>
+        
+    </head>
+    <body>
+        <div class="row">
+            <h1>Purchase Interface</h1>
+            
+            <div class="col">
+                <h3>Owner</h3>
+                
+                <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">Services Selected</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Agreements</span></li>
+                        <li><span class="service-box-item">Place/Time</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+                
+                <p></p>
+                
+                <div>
+                    <p></p>
+                    <label>Signature: </label>
+                    <input type="text">
+                </div>
+                
+                <div>
+                    <p>Payment Information (owner view only)</p>
+                </div>
+                
+            </div>
+            
+            <div class="col">
+                <h3>Vendor</h3>
+                
+                <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">Services Requested</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Agreements</span></li>
+                        <li><span class="service-box-item">Place/Time</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+                
+                <p></p>
+                
+                <div>
+                    <p></p>
+                    <label>Signature: </label>
+                    <input type="text">
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="bot">
+            <button>Finalize</button>
+        </div>
+        
+    </body>
+</html>

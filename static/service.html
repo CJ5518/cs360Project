@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Service Calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            .col {
+                float: left;
+                width: 33%;
+            }
+
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            
+            .service-box-list {
+                list-style-type: none; /* Remove bullets */
+            }
+
+            .service-box {
+                border:1px solid black;
+                width: 200px;
+            }
+
+        </style>
+        
+    </head>
+    <body>
+        <div class="row">
+            <h1>Service Calculator</h1>
+            <p>Cell Plan</p>
+            
+            <div class="col">
+                <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">AT&T</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Contract</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col">
+               <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">VERISION</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Contract</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">T-MOBILE</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Contract</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+        <p></p>
+        
+        <div class="row">
+            <p>Internet</p>
+            
+            <div class="col">
+                <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">SPECTRUM</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Contract</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col">
+               <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">ZIPLY</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Contract</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="service-box">
+                    <ul class="service-box-list">
+                        <li><span class="service-box-title">DIRECT TV</span></li>
+                        <li><span class="service-box-item">Price</span></li>
+                        <li><span class="service-box-item">Contract</span></li>
+                        <li><span class="service-box-item">...</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        
+        <p></p>
+        <button>Calculate</button>
+        
+    </body>
+</html>
