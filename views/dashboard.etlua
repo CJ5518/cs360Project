@@ -1,19 +1,5 @@
 <% render("widgets.nav"); %>
-<% local serviceBox = require("widgets.serviceBox"); %>
-
 
 
 <h1>Hello, Randal Graves</h1>
-sdsd
-<%
-
-local widgetThing = serviceBox({
-  serviceDescription = "Description",
-  servicePrice = "$20",
-  serviceType = "Internet",
-  title = "Title"
-})
-
-widget(widgetThing);
-
-%>
+<button>Edit Profile Information</button>

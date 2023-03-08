@@ -39,7 +39,3 @@ a.unstyled {
 }
 
 /* service box widget */
-
-.service-box-list {
-	list-style-type: none; /* Remove bullets */
-}

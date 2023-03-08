@@ -1,0 +1,49 @@
+<% local serviceBox = require("widgets.serviceBox"); %>
+<% render("widgets.nav") %>
+
+Search Bar: 
+<input type = "text"><br>
+
+Filters:<br>
+Max Price <input type="range"><br>
+Category: <input type="text"><br>
+etc.
+
+<h2>Promoted Services</h2>
+<ul class = "horizontal-list">
+
+<%
+
+local widgetThing = serviceBox({
+  serviceDescription = "Description",
+  servicePrice = "$20",
+  serviceType = "Internet",
+  title = "Title"
+})
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+
+%>
+</ul>
+<h2>All Services</h2>
+<ul class = "horizontal-list">
+
+<%
+
+local widgetThing = serviceBox({
+  serviceDescription = "Description",
+  servicePrice = "$20",
+  serviceType = "Internet",
+  title = "Title"
+})
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+element("li", function() widget(widgetThing); end)
+
+%>
+</ul>

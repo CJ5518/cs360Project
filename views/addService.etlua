@@ -1,0 +1,17 @@
+<% render("widgets.nav") %>
+<h1>Add Service</h1>
+
+
+<h2>Service Information</h2>
+<hr>
+
+<% 
+local tab = {"Name", "Type", "Cost", "Contract", "Description", "Details"}
+
+for q = 1, #tab do
+	element("div", tab[q] .. ": ", function() element("input", {type="text"}) end);
+end
+
+%>
+
+<input type="submit">

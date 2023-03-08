@@ -1,0 +1,12 @@
+<% render("widgets.nav") %>
+
+
+<h1>Service Details</h1>
+<p>Service Description</p>
+<p>Company Name</p>
+<p>Cost and other details</p>
+<p>Owner information:<br>Name, contact information</p>
+<p>Contract:</p>
+This contract is:firm, non-flimsy, no flim-flam. If the stuff in this contract<br>
+isn't, uhh, fulfilled by you, the one signing it, then, woof,<br>
+hoo boy. Big trouble, legally speaking.
