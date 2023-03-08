@@ -23,4 +23,8 @@ app:get("signup", "/signup", function()
 	return {render = "signup"};
 end)
 
+app:get("signupUser", "/signupUser", function()
+	return {render = "signupUser"};
+end)
+
 return app;
