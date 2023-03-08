@@ -1,0 +1,5 @@
+<% render("widgets.nav") %>
+
+<h1>MyHome</h1>
+
+<p>Your solution for buying and selling services related to your home</p>

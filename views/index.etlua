@@ -2,3 +2,10 @@
 
 <h1>MyHome</h1>
 
+<p>Your solution for buying and selling services related to your home</p>
+
+
+<div id="connection-div">
+<button class="thick-button blue"><a class="unstyled" href="<%= url_for('signup') %>">Link</a></button>
+<button class="thick-button orange"><a class = "unstyled" href="<%= url_for('login') %>">Login</a></button>
+</div>

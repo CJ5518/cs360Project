@@ -10,3 +10,27 @@
 	padding: 10px 10px;
 	display:inline;
 }
+
+.thick-button {
+	border: 0.065mm;
+	color: white;
+	padding: 10px;
+}
+
+a.unstyled {
+	color: inherit;
+	text-decoration: none;
+}
+
+.thick-button.blue {
+	background-image: -webkit-linear-gradient(top,#5ca2e6,#1373b4 50%);
+}
+
+.thick-button.orange {
+	background-image: -webkit-linear-gradient(top,#ff9e41,#e87700 50%);
+}
+
+#connection-div {
+	display:inline;
+	padding: 20px;
+}

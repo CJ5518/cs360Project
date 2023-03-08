@@ -15,4 +15,12 @@ app:get("serviceCalc", "/servicecalculator", function()
 	return {render = "serviceCalc"};
 end)
 
+app:get("login", "/login", function()
+	return {render = "login"};
+end)
+
+app:get("signup", "/signup", function()
+	return {render = "signup"};
+end)
+
 return app;
