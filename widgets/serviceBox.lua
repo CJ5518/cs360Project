@@ -3,7 +3,6 @@ local Widget = require("lapis.html").Widget
 local servBox, servBox_mt = Widget:extend("servBox")
 
 local items = {
-	{"", "serviceTitle"},
 	{"Type: ", "serviceType"},
 	{"Price: ", "servicePrice"},
 	{"Description: ", "serviceDescription"}
@@ -12,10 +11,13 @@ local items = {
 function servBox_mt:content()
 	div({class = "service-box"}, function()
 		ul({class = "service-box-list"}, function ()
-			li()
-			span({class = "service-box-title"}, self.title)
+			li(function() 
+				span({class = "service-box-title"}, self.title)
+			end)
 			for q = 1, #items do
-				
+				li(function ()
+					span({class = "service-box-item"}, self[items[q][2]]);
+				end)
 			end
 		end)
 	end)
