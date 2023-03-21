@@ -3,3 +3,4 @@
 
 <h1>Hello, Randal Graves</h1>
 <button>Edit Profile Information</button>
+<button onclick="location.href='/'">logout</button>
