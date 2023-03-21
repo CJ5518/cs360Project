@@ -35,7 +35,7 @@ element("li", function() widget(widgetThing); end)
 
 local widgetThing = serviceBox({
   serviceDescription = "Description",
-  servicePrice = "$20",
+  servicePrice = "$40",
   serviceType = "Internet",
   title = "Title"
 })

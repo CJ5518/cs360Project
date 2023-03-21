@@ -6,24 +6,6 @@
 	<link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-<style>
-.service-box-list {
-	list-style-type: none; /* Remove bullets */
-}
-
-.service-box {
-	border:1px solid black;
-	width: 120px;
-}
-
-.horizontal-list {
-	list-style-type: none; /* Remove bullets */
-}
-
-.horizontal-list li {
-	display:inline-block;
-}
-</style>
 	<% content_for("inner") %>
 </body>
 </html>
