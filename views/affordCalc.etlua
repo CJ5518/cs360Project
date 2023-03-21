@@ -1,0 +1,4 @@
+<% render("widgets.nav") %>
+<h1>Affordability Calculator</h1>
+
+Coming Soon
