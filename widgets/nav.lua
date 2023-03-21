@@ -3,6 +3,7 @@ local Widget = require("lapis.html").Widget
 local nav, nav_mt = Widget:extend("nav")
 
 local links = {
+	{"Index", "index"},
 	{"Dashboard", "dashboard"},
 	{"Service Calculator", "serviceCalc"},
 	{"Affordability Calculator", "affordCalc"},
