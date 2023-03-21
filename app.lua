@@ -9,6 +9,11 @@ end)
 
 app:match("/:page", function(self)
 	return {render = self.params.page};
-  end)
+end)
+
+app:match("/service/:service_id", function(self)
+	self.service_id = self.params.service_id;
+	return {render = "servicePage"}
+end)
 
 return app;
