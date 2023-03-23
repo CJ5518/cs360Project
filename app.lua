@@ -7,10 +7,16 @@ app:get("index", "/", function()
 	return {render = "index"};
 end)
 
-app:post("signupAction", "/signupAction", function(self) 
-	for i, v in pairs(self.POST) do
-		self:write(tostring(i) .. ": ", tostring(v));
+app:post("signupAction", "/signupAction", function(self)
+	self.session.signupInfo = self.POST;
+	if self.POST.userType == "User" then
+		return {render = "signupUser"}
 	end
+	return {render = "signupVendor"}
+end)
+
+app:post("signupUserFinal", "/signupUserFinal", function(self)
+
 end)
 
 app:match("/*", function(self)
