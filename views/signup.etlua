@@ -1,14 +1,17 @@
 <% render("widgets.nav") %>
 <h1>MyHome Sign Up</h1>
 
-<input type="radio" checked id="html" name="fav_language" value="User">
-<label for="html">User</label><br>
-<input type="radio" id="css" name="fav_language" value="Vendor">
-<label for="css">Vendor</label><br>
 
-Email: 
-<input type="email">
-<br>
-Password: <input type = "password"><br>
-Confirm Password: <input type = "password"><br>
-<input type="submit">
+<form action="/signupAction" method="post"
+	oninput='confirmPassword.setCustomValidity(password.value != confirmPassword.value ? "Passwords do not match." : "")'>
+	
+	<input type="radio" checked id="html" name="userType" value="User">
+	<label for="html">User</label><br>
+	<input type="radio" id="css" name="userType" value="Vendor">
+	<label for="css">Vendor</label><br>
+
+	Email: <input type="email" id="email" name="email" required><br>
+	Password: <input type="password" id="password" name="password" required><br>
+	Confirm Password: <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+	<input type="submit" value="Create Account">
+</form>
