@@ -17,10 +17,10 @@ Confirm Password: <input type="password" id="confirmPassword" name="confirmPassw
 <hr>
 
 <% 
-local tab = {"First Name", "Last Name", "Phone Number"}
+local tab = {"FirstName", "LastName", "PhoneNumber"}
 
 for q = 1, #tab do
-	element("div", tab[q] .. ": ", function() element("input", {type="text"}) end);
+	element("div", tab[q] .. ": ", function() element("input", {type="text", required = true, name = tab[q]}) end);
 end
 
 %>
@@ -32,7 +32,7 @@ local tab = {"address", "construction type",
 "number of bedrooms", "number of bathrooms", "floor space", "number of floors", "heating time", "roof type", "available utility lines"}
 
 for q = 1, #tab do
-	element("div", tab[q] .. ": ", function() element("input", {type="text"}) end);
+	element("div", tab[q] .. ": ", function() element("input", {type="text", name = tab[q]}) end);
 end
 
 %>

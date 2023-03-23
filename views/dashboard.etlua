@@ -1,6 +1,6 @@
 <% render("widgets.nav"); %>
 
 
-<h1>Hello, Randal Graves</h1>
+<h1>Hello <%=session.userInfo.FirstName%></h1>
 <button>Edit Profile Information</button>
-<button onclick="location.href='/'">logout</button>
+<button onclick="location.href='/logout'">logout</button>

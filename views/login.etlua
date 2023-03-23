@@ -1,14 +1,14 @@
 <% render("widgets.nav") %>
 <h1>MyHome Login</h1>
 
-<input type="radio" checked id="html" name="fav_language" value="User">
-<label for="html">User</label><br>
-<input type="radio" id="css" name="fav_language" value="Vendor">
-<label for="css">Vendor</label><br>
+<form action="/loginAction" method="post">
+	
+	<input type="radio" checked id="html" name="userType" value="User">
+	<label for="html">User</label><br>
+	<input type="radio" id="css" name="userType" value="Vendor">
+	<label for="css">Vendor</label><br>
 
-Email: 
-<input type="email">
-<br>
-Password: <input type = "password"><br>
-<a href="passwordReset">Forgot Password?</a><br>
-<input type="submit">
+	Email: <input type="email" id="email" name="email" required><br>
+	Password: <input type="password" id="password" name="password" required><br>
+	<input type="submit" value="Log in">
+</form>
