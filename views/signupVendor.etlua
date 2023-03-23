@@ -1,16 +1,12 @@
 <% render("widgets.nav") %>
 <h1>MyHome Sign Up</h1>
 
-<input type="radio" checked id="html" name="fav_language" value="User">
-<label for="html">User</label><br>
-<input type="radio" id="css" name="fav_language" value="Vendor">
-<label for="css">Vendor</label><br>
+<input type="radio" checked id="html" name="fav_language" value="Vendor">
+<label for="html">Vendor</label><br>
 
-Email: 
-<input type="email">
-<br>
-Password: <input type = "password"><br>
-Confirm Password: <input type = "password"><br>
+Email: <input type="email" id="email" name="email" disabled value="<%=session.signupInfo.email%>"><br>
+Password: <input type="password" id="password" name="password" disabled value="<%=session.signupInfo.password%>"><br>
+Confirm Password: <input type="password" id="confirmPassword" name="confirmPassword" disabled value="<%=session.signupInfo.confirmPassword%>"><br>
 
 
 <h2>Vendor Information</h2>
