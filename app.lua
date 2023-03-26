@@ -56,12 +56,11 @@ end)
 
 --Index page
 app:get("index", "/", function(self)
-	self:write("HERE");
-	local out, res = email.send_email("thecjarmy7@gmail.com", "Subject", "Body");
-	self:write(out);
-	self:write(tostring(res));
-	self:write("HERE");
 	return {render = "index"};
+end)
+
+app:match("index2", "/index", function(self)
+	return {redirect_to = "/"};
 end)
 
 --Service page
