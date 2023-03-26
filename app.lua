@@ -4,7 +4,7 @@ app:enable("etlua");
 app.layout = require "views.layout"
 
 local db = require("lapis.db");
-
+local email = require("helpers.email");
 
 --Signing up
 
@@ -55,7 +55,12 @@ end)
 --------------------------------------------------
 
 --Index page
-app:get("index", "/", function()
+app:get("index", "/", function(self)
+	self:write("HERE");
+	local out, res = email.send_email("thecjarmy7@gmail.com", "Subject", "Body");
+	self:write(out);
+	self:write(tostring(res));
+	self:write("HERE");
 	return {render = "index"};
 end)
 
