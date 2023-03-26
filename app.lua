@@ -5,9 +5,8 @@ app.layout = require "views.layout"
 
 local db = require("lapis.db");
 
-app:get("index", "/", function()
-	return {render = "index"};
-end)
+
+--Signing up
 
 app:post("signupAction", "/signupAction", function(self)
 	self.session.signupInfo = self.POST;
@@ -16,6 +15,21 @@ app:post("signupAction", "/signupAction", function(self)
 	end
 	return {render = "signupVendor"}
 end)
+
+app:post("signupUserFinal", "/signupUserFinal", function(self)
+	db.query("INSERT INTO Users (FirstName, Email, Password) VALUES (?,?,?)", 
+		self.POST.FirstName, self.session.signupInfo.email, self.session.signupInfo.password
+	);
+	local userInfo = {};
+	userInfo.FirstName = self.POST.FirstName;
+	userInfo.email = self.session.signupInfo.email;
+	self.session.userInfo = userInfo;
+	self.session.signupInfo = nil;
+	return {render = "dashboard"};
+end)
+
+
+-- Logging in and out
 
 app:post("loginAction", "/loginAction", function(self)
 	if self.POST.userType == "User" then
@@ -33,35 +47,27 @@ end)
 
 app:match("logout", "/logout", function(self)
 	self.session.userInfo = nil;
+	return {redirect_to  = "/"};
+end)
+
+--------------------------------------------------
+-- Routes that go to pages --
+--------------------------------------------------
+
+--Index page
+app:get("index", "/", function()
 	return {render = "index"};
 end)
 
-app:post("signupUserFinal", "/signupUserFinal", function(self)
-	--[[local res = db.query("SELECT * FROM Users")
-	for i,v in pairs(res) do
-		self:write("<br> " .. tostring(i) .. ": " .. tostring(v));
-		for i2, v2 in pairs(v) do
-			self:write("<br>&emsp;" .. tostring(i2) .. ": " .. tostring(v2));
-		end
-	end--]]
-	db.query("INSERT INTO Users (FirstName, Email, Password) VALUES (?,?,?)", 
-		self.POST.FirstName, self.session.signupInfo.email, self.session.signupInfo.password
-	);
-	local userInfo = {};
-	userInfo.FirstName = self.POST.FirstName;
-	userInfo.email = self.session.signupInfo.email;
-	self.session.userInfo = userInfo;
-	self.session.signupInfo = nil;
-	return {render = "dashboard"};
-end)
-
-app:match("/*", function(self)
-	return {render = self.params.splat};
-end)
-
+--Service page
 app:match("/service/:service_id", function(self)
 	self.service_id = self.params.service_id;
 	return {render = "servicePage"}
+end)
+
+--A catch-all, probably not good for prod but easy for adding lots of new pages
+app:match("/*", function(self)
+	return {render = self.params.splat};
 end)
 
 return app;
