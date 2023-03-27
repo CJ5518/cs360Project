@@ -5,7 +5,12 @@ function requestPasswordReset() {
 		  zipcode: 97201
 		},
 		success: function( result ) {
-		  console.log(result);
-		}
+		  console.log("Success");
+		},
+		fail
 	  });
+}
+
+function tryLogin() {
+	
 }

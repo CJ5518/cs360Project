@@ -4,6 +4,7 @@ local app = lapis.Application();
 local db = require("lapis.db");
 local email = require("helpers.email");
 local Users = require("models.Users");
+local accounts = require("helpers.accounts");
 
 
 
@@ -29,17 +30,16 @@ end)
 -- Logging in and out
 
 app:post("loginAction", "/loginAction", function(self)
-	if self.POST.userType == "User" then
-		local res = db.query("SELECT UserID, FirstName FROM Users WHERE Password = ? AND Email = ?;", self.POST.password, self.POST.email);
-		if (res[1]) then
-			self.session.userInfo = {FirstName = res[1]["FirstName"]};
-			return {redirect_to = "/dashboard"};
-		else
-			self:write("Login failed");
-			return;
-		end
+	local user = accounts.tryLogIn(self, self.POST.email, self.POST.password, "User");
+	if not user then
+		return {
+			status = 401
+		}
+	else
+		return {
+			redirect_to = "/dashboard";
+		}
 	end
-	self:write("Login failed");
 end)
 
 app:match("logout", "/logout", function(self)

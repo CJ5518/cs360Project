@@ -15,8 +15,8 @@ end
 --@tparam string email - the email
 --@tparam string pass - the password
 --@treturn User user - the user with the credentials, or nil
-function Users:exists_email(email)
-	return Users:find({[db.raw("lower(Email)")] = email:lower()});
+function Users:with_credentials(email, pass)
+	return Users:find({[db.raw("lower(Email)")] = email:lower(), Password = pass});
 end
 
 

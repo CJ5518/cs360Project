@@ -10,8 +10,8 @@
 
 	Email: <input type="email" id="email" name="email" required><br>
 	Password: <input type="password" id="password" name="password" required><br>
-	<input type="submit" value="Log in">
 </form>
 
-<script src="/static/js/passwordReset.js"></script>
+<script src="/static/js/loginPage.js"></script>
+<button onlick="tryLogin()">Log in</button>
 <button onclick="requestPasswordReset()">Reset Password</button>
