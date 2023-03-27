@@ -48,6 +48,22 @@ app:match("logout", "/logout", function(self)
 	return {redirect_to  = "/"};
 end)
 
+--Updating user info
+
+app:post("updateUserInfo", "/updateUserInfo", function(self)
+	if self.session.isLoggedIn then
+		local user = Users:find(self.session.userID);
+		user.FirstName = self.POST.FirstName;
+		user.LastName = self.POST.LastName;
+		user.PhoneNumber = self.POST.PhoneNumber;
+		user.AnnualIncome = self.POST.AnnualIncome;
+		user:update("FirstName", "LastName", "PhoneNumber", "AnnualIncome");
+		return {redirect_to = "/dashboard"};
+	else
+		self:write("Something went wrong, sorry! (updateUserInfo)");
+	end
+end)
+
 --------------------------------------------------
 -- Routes that go to pages --
 --------------------------------------------------

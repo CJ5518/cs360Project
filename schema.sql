@@ -1,10 +1,12 @@
 CREATE TABLE Users (
     UserID INTEGER PRIMARY KEY,
+    Password varchar(255),
     LastName varchar(255),
     FirstName varchar(255),
-    Email varchar(255), Password varchar(255),
-    PhoneNumber varchar(255)
-, AnnualIncome int);
+    Email varchar(255),
+    PhoneNumber varchar(255),
+    AnnualIncome int
+);
 CREATE TABLE Homes (
     HomeID INTEGER PRIMARY KEY,
     HomeOwner INTEGER,
