@@ -1,4 +1,4 @@
-# Documentation for helpers
+# Documentation for widgets
 
 ## editUserInfoForm
 
