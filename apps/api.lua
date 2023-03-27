@@ -32,7 +32,6 @@ end)
 
 app:match("logout", "/logout", function(self)
 	accounts.logOut(self);
-	return {redirect_to  = "/"};
 end)
 
 app:get("passwordResetRequest", "/passwordResetRequest", function(self)

@@ -31,10 +31,13 @@ function Dashboard_mt:content()
 		
 
 	else --This is NOT the user's first time here
+		
 		h1("Hello " .. user.FirstName);
 		div({class = "body"}, function()
 			text "Welcome to my site!"
 		end)
+		button({id = "logoutButton"}, "Log out");
+		raw('<script src="/static/js/dashboardLoggedIn.js"></script>');
 	end
 end
 
