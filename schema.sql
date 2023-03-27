@@ -22,3 +22,12 @@ CREATE TABLE Homes (
     ConstructionYear int,
     FOREIGN KEY(HomeOwner) REFERENCES Users(UserID)
 );
+CREATE TABLE Vendors (
+    VendorID INTEGER PRIMARY KEY,
+    Password varchar(255),
+    CompanyName varchar(255),
+    Email varchar(255),
+    PhoneNumber varchar(255),
+    Description varchar(2048),
+    LogoFilePath varchar(255)
+);
