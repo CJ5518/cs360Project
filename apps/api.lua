@@ -49,7 +49,7 @@ app:match("logout", "/logout", function(self)
 end)
 
 app:get("passwordResetRequest", "/passwordResetRequest", function(self)
-	self:write("We made it!");
+	return {json = {thingy = "Sup"}};
 end)
 
 --Updating user info
