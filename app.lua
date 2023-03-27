@@ -48,6 +48,10 @@ app:match("logout", "/logout", function(self)
 	return {redirect_to  = "/"};
 end)
 
+app:get("passwordResetRequest", "/passwordResetRequest", function(self)
+	self:write("We made it!");
+end)
+
 --Updating user info
 
 app:post("updateUserInfoAction", "/updateUserInfoAction", function(self)
