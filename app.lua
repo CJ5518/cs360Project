@@ -5,27 +5,24 @@ app.layout = require "views.layout"
 
 local db = require("lapis.db");
 local email = require("helpers.email");
+local Users = require("models.Users");
 
 --Signing up
 
 app:post("signupAction", "/signupAction", function(self)
-	self.session.signupInfo = self.POST;
 	if self.POST.userType == "User" then
-		return {render = "signupUser"}
+		if Users:exists_email(self.POST.email) then
+			--TODO
+			self:write("This user already exists!");
+		else
+			local user = Users:new(self.POST.email, self.POST.password);
+			self.session.isLoggedIn = true;
+			self.session.userID = user.UserID;
+			return {redirect_to = "/dashboard"};
+		end
 	end
-	return {render = "signupVendor"}
-end)
-
-app:post("signupUserFinal", "/signupUserFinal", function(self)
-	db.query("INSERT INTO Users (FirstName, Email, Password) VALUES (?,?,?)", 
-		self.POST.FirstName, self.session.signupInfo.email, self.session.signupInfo.password
-	);
-	local userInfo = {};
-	userInfo.FirstName = self.POST.FirstName;
-	userInfo.email = self.session.signupInfo.email;
-	self.session.userInfo = userInfo;
-	self.session.signupInfo = nil;
-	return {render = "dashboard"};
+	--TODO
+	self:write("Sorry! Vendors are currently not allowed to exist")
 end)
 
 
@@ -36,7 +33,7 @@ app:post("loginAction", "/loginAction", function(self)
 		local res = db.query("SELECT UserID, FirstName FROM Users WHERE Password = ? AND Email = ?;", self.POST.password, self.POST.email);
 		if (res[1]) then
 			self.session.userInfo = {FirstName = res[1]["FirstName"]};
-			return {render = "dashboard"};
+			return {redirect_to = "/dashboard"};
 		else
 			self:write("Login failed");
 			return;
@@ -46,7 +43,8 @@ app:post("loginAction", "/loginAction", function(self)
 end)
 
 app:match("logout", "/logout", function(self)
-	self.session.userInfo = nil;
+	self.session.isLoggedIn = nil;
+	self.session.userID = nil;
 	return {redirect_to  = "/"};
 end)
 
@@ -56,11 +54,22 @@ end)
 
 --Index page
 app:get("index", "/", function(self)
+	if self.session.isLoggedIn then
+		return {redirect_to = "dashboard"};
+	end
 	return {render = "index"};
 end)
 
 app:match("index2", "/index", function(self)
 	return {redirect_to = "/"};
+end)
+
+--Dashboard
+app:get("dashboard", "/dashboard", function(self)
+	if not self.session.isLoggedIn then
+		return {redirect_to = "/"};
+	end
+	return {render = "dashboard"};
 end)
 
 --Service page

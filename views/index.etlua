@@ -1,10 +1,22 @@
+<style>
+body {
+  background-image: url('static/logo.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+</style>
+
 <% render("widgets.nav") %>
+
+
 
 <h1>MyHome</h1>
 
 <p>Your solution for buying and selling services related to your home</p>
 
 <%
+--TODO
 function url_for (n)
 	return "/" .. n;
 end
