@@ -1,6 +1,6 @@
 local Widget = require("lapis.html").Widget
 
-local Dashboard, Dashboard_mt = Widget:extend("Index")
+local Dashboard, Dashboard_mt = Widget:extend("Dashboard")
 local Users = require("models.Users");
 
 --<button>Edit Profile Information</button>
@@ -18,23 +18,13 @@ function Dashboard_mt:content()
 			end)
 		end
 		div({class = "container"}, function()
+			rowAndCol(function() h3({class = "mb-3"},"Hello new user, let's get you set up"); end)
 			form({action = "/updateUserInfo", method = "post"}, function() 
-				local function inputTextEasy(id, lab, required, placeholder, type)
-					type = type or "text"
-					div({class = "mb-3"}, function()
-						label({["for"] = id, class=""}, lab);
-						input(
-							{["type"] = type, id = id, name=id, ["required"]=required, class = "form-control", ["placeholder"]=placeholder}
-						);
-					end)
-				end
-				rowAndCol(function() h3({class = "mb-3"},"Hello new user, let's get you set up"); end)
-				inputTextEasy("FirstName", "First Name", true, "John");
-				inputTextEasy("LastName", "Last Name", true, "Smith");
-				inputTextEasy("PhoneNumber", "Phone Number", false, "555-3226");
-				inputTextEasy("AnnualIncome", "Annual Income", true, "32000", "number");
-
-				button({type="submit", class="btn btn-primary"}, "Submit");
+				local editUserInfoFormWidget = require("widgets.editUserInfoForm");
+				widget(editUserInfoFormWidget({
+					onlyForm = true,
+					editPassword = false
+				}));
 			end)
 		end)
 		

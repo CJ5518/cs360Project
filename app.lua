@@ -50,18 +50,33 @@ end)
 
 --Updating user info
 
-app:post("updateUserInfo", "/updateUserInfo", function(self)
+app:post("updateUserInfoAction", "/updateUserInfoAction", function(self)
 	if self.session.isLoggedIn then
 		local user = Users:find(self.session.userID);
-		user.FirstName = self.POST.FirstName;
-		user.LastName = self.POST.LastName;
-		user.PhoneNumber = self.POST.PhoneNumber;
-		user.AnnualIncome = self.POST.AnnualIncome;
+		user.FirstName = self.POST.FirstName == "" and user.FirstName or self.POST.FirstName;
+		user.LastName = self.POST.LastName == "" and user.LastName or self.POST.LastName;
+		user.PhoneNumber = self.POST.PhoneNumber == "" and user.PhoneNumber or self.POST.PhoneNumber;
+		user.AnnualIncome = self.POST.AnnualIncome == "" and user.AnnualIncome or self.POST.AnnualIncome;
 		user:update("FirstName", "LastName", "PhoneNumber", "AnnualIncome");
 		return {redirect_to = "/dashboard"};
 	else
 		self:write("Something went wrong, sorry! (updateUserInfo)");
 	end
+end)
+
+--------------------------------------------------
+-- Routes that kind of go to pages but have some other stuff going on --
+--------------------------------------------------
+
+app:get("editUserInfo", "/editUserInfo", function(self)
+	return self:html(function()
+		local editUserInfoFormWidget = require("widgets.editUserInfoForm");
+		widget(editUserInfoFormWidget({
+			onlyForm = false,
+			editPassword = true,
+			session = self.session
+		}));
+	end)
 end)
 
 --------------------------------------------------
