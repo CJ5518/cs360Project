@@ -1,7 +1,7 @@
 <% render("widgets.nav") %>
 <h1>MyHome Login</h1>
 
-<form action="/loginAction" method="post">
+<form action="/loginAction" method="post" id="loginForm">
 	
 	<input type="radio" checked id="html" name="userType" value="User">
 	<label for="html">User</label><br>
@@ -13,5 +13,5 @@
 </form>
 
 <script src="/static/js/loginPage.js"></script>
-<button onlick="tryLogin()">Log in</button>
+<button onclick="tryLogin()">Log in</button>
 <button onclick="requestPasswordReset()">Reset Password</button>

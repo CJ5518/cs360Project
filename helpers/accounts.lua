@@ -18,7 +18,7 @@ function accounts.isLoggedIn(self)
 			if self.session.current_user then
 				if self.session.current_user.Type and self.session.current_user.UserID then
 					if self.session.current_user.Type == "User" then
-						return User:find(tonumber(self.session.current_user.UserID));
+						return Users:find(tonumber(self.session.current_user.UserID));
 					elseif self.session.current_user.Type == "Vendor" then
 						--TODO
 						error("Come back later for Vendor support!");
@@ -44,13 +44,15 @@ function accounts.tryNewUser(self, email, pass, type)
 end
 
 --@tparam self - self object containing self.session
---@treturn bool isLoggedIn - returns true if the user is logged in
+--@treturn User/Vendor user - returns the newly logged in user object, or nil
 function accounts.tryLogIn(self, email, pass, type)
 	if type == "User" then
-		local user = Users:check_credentials(email, pass);
+		local user = Users:with_credentials(email, pass);
+		if not user then return nil; end
 		self.session.current_user = {};
 		self.session.current_user.UserID = user.UserID;
 		self.session.current_user.Type = "User";
+		return user;
 	elseif type == "Vendor" then
 		--TODO
 		error("Vendor not ready yet come back later");

@@ -4,6 +4,7 @@ local app = lapis.Application();
 local db = require("lapis.db");
 local email = require("helpers.email");
 local Users = require("models.Users");
+local accounts = require("helpers.accounts");
 
 --------------------------------------------------
 -- Routes that kind of go to pages but have some other stuff going on --
@@ -26,7 +27,7 @@ end)
 
 --Index page
 app:get("index", "/", function(self)
-	if self.session.isLoggedIn then
+	if accounts.isLoggedIn(self) then
 		return {redirect_to = "dashboard"};
 	end
 	return {render = "index"};
@@ -38,7 +39,7 @@ end)
 
 --Dashboard
 app:get("dashboard", "/dashboard", function(self)
-	if not self.session.isLoggedIn then
+	if not accounts.isLoggedIn(self) then
 		return {redirect_to = "/"};
 	end
 	return {render = "dashboard"};

@@ -11,19 +11,7 @@ local accounts = require("helpers.accounts");
 --Signing up
 
 app:post("signupAction", "/signupAction", function(self)
-	if self.POST.userType == "User" then
-		if Users:exists_email(self.POST.email) then
-			--TODO
-			self:write("This user already exists!");
-		else
-			local user = Users:new(self.POST.email, self.POST.password);
-			self.session.isLoggedIn = true;
-			self.session.userID = user.UserID;
-			return {redirect_to = "/dashboard"};
-		end
-	end
-	--TODO
-	self:write("Sorry! Vendors are currently not allowed to exist")
+	
 end)
 
 
@@ -43,8 +31,7 @@ app:post("loginAction", "/loginAction", function(self)
 end)
 
 app:match("logout", "/logout", function(self)
-	self.session.isLoggedIn = nil;
-	self.session.userID = nil;
+	accounts.logOut(self);
 	return {redirect_to  = "/"};
 end)
 

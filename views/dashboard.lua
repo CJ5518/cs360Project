@@ -2,12 +2,13 @@ local Widget = require("lapis.html").Widget
 
 local Dashboard, Dashboard_mt = Widget:extend("Dashboard")
 local Users = require("models.Users");
+local accounts = require("helpers.accounts");
 
 --<button>Edit Profile Information</button>
 --<button onclick="location.href='/logout'">logout</button>
 
 function Dashboard_mt:content()
-	local user = Users:find(self.session.userID)
+	local user = accounts.isLoggedIn(self);
 	--TODO, this is just used as the way to check if the user has set up their profile
 	if not user.FirstName then
 		local function rowAndCol(func)
