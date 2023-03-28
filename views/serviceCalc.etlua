@@ -1,4 +1,8 @@
 <% render("widgets.nav") %>
 <h1>Service Calculator</h1>
 
-Coming Soon
+<h3>Coming Soon</h3>
+
+<p>1) Input: Service Type</p>
+<p>2) Input: Relevant Info</p>
+<p>3) Return: Best Service</p>
