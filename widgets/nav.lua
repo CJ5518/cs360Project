@@ -6,7 +6,8 @@ local links = {
 	{"Index", "index"},
 	{"Service Calculator", "serviceCalc"},
 	{"Affordability Calculator", "affordCalc"},
-	{"Service Search", "serviceSearch"}
+	{"Service Search", "serviceSearch"},
+	{"Edit Home Info", "editHomeInfo"}
 }
 
 --Dunno man don't ask

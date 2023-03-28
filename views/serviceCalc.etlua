@@ -1,4 +1,4 @@
 <% render("widgets.nav") %>
+<h1>Service Calculator</h1>
 
-<h1>MyHome</h1>
-
+Coming Soon
