@@ -2,10 +2,14 @@ local lapis = require("lapis");
 local app = lapis.Application();
 
 local db = require("lapis.db");
-local email = require("helpers.email");
+local send_email = require("helpers.email").send_email;
 local Users = require("models.Users");
 local accounts = require("helpers.accounts");
+local getRandomString = require("helpers.randomString").getRandomString;
 
+app:before_filter(function(self)
+	self.user = accounts.isLoggedIn(self);
+end)
 
 
 --Signing up
@@ -26,7 +30,7 @@ app:post("signupAction", "/signupAction", function(self)
 		else
 			--We are good to make the account
 			local user = accounts.makeNewUser(self, self.POST.email, self.POST.password, self.POST.userType);
-			self:write(tostring(user.UserID));
+			return {redirect_to = "/dashboard"};
 		end
 	end
 end)
@@ -51,8 +55,40 @@ app:match("logout", "/logout", function(self)
 	accounts.logOut(self);
 end)
 
-app:get("passwordResetRequest", "/passwordResetRequest", function(self)
-	return {json = {thingy = "Sup"}};
+-----------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------
+
+app:post("passwordResetRequest", "/passwordResetRequest", function(self)
+	local email = self.POST.email;
+	local user = Users:find({["email"] = email});
+	if user then
+		--TODO (Maybe)
+		--Send them a new password
+		user.Password = getRandomString(30);
+		local out, res = send_email(email, "MyHome - Password Reset", "Here's your new password: " .. user.Password);
+		if out:find("Queued") then
+			user:update("Password");
+			return {
+				status = 200,
+				json = {
+					message = "An email has been sent to the address you entered"
+				}
+			}
+		else
+			return {
+				status = 500
+			}
+		end
+	end
+	return {
+		status = 404,
+		json = {
+			message = "Could not find an account with the email you entered"
+		}
+	};
 end)
 
 --Updating user info

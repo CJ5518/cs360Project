@@ -1,11 +1,20 @@
 function requestPasswordReset() {
 	$.ajax({
 		url: "/passwordResetRequest",
+		method: "POST",
 		data: {
-		  zipcode: 97201
+		  email: $("#email").val()
 		},
-		success: function( result ) {
-		  console.log("Success");
+		statusCode: {
+			404: function(result) {
+				alert("Could not find the email address you entered");
+			},
+			200: function(result) {
+				alert(result.message);
+			},
+			500: function(res) {
+				alert("Something went wrong on the server, sorry!");
+			}
 		}
 	  });
 }
