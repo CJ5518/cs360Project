@@ -19,7 +19,7 @@ function editUserInfoForm_mt:content()
 		end
 		form({action = "/updateUserInfoAction", method = "post"}, function()
 			--TODO
-			inputTextEasy("Password", "Password (Not implemented yet sorry)", false, "", "password", self.editPassword);
+			--inputTextEasy("Password", "Password (Not implemented yet sorry)", false, "", "password", self.editPassword);
 			inputTextEasy("FirstName", "First Name", true, user.FirstName);
 			inputTextEasy("LastName", "Last Name", true, user.LastName);
 			inputTextEasy("PhoneNumber", "Phone Number", false, user.PhoneNumber);
