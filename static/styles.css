@@ -62,3 +62,30 @@ a.unstyled {
 .horizontal-list li {
 	display:inline-block;
 }
+
+
+/*Navbar*/
+
+.navigation {
+	background-color: #dcdcdc;
+	overflow: hidden;
+}
+
+.navigation a {
+	float: left;
+	color: #000000;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.navigation a:hover:not(.active) {
+	background-color: #808080;
+	color: rgb(0, 0, 0);
+}
+
+.nav-list li a.active {
+	background-color: #066e73;
+	color: rgb(255, 255, 255);
+}

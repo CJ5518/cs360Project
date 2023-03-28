@@ -3,7 +3,7 @@ local Widget = require("lapis.html").Widget
 local nav, nav_mt = Widget:extend("nav")
 
 local links = {
-	{"Index", "index"},
+	{"Home", "index"},
 	{"Service Calculator", "serviceCalc"},
 	{"Affordability Calculator", "affordCalc"},
 	{"Service Search", "serviceSearch"},
@@ -23,9 +23,18 @@ function nav_mt:content()
 				for q = 1, #links do
 					li(function()
 						if not modeIsDev then
-							a({href=self:url_for(links[q][2])}, links[q][1]);
-						else 
-							a({href="/" .. (links[q][2])}, links[q][1]);
+							if q == 1 then
+								a({class='active', href=self:url_for(links[q][2])}, links[q][1]);
+							else
+								a({href=self:url_for(links[q][2])}, links[q][1]);
+							end
+
+						else
+							if q == 1 then
+								a({class='active', href="/" .. (links[q][2])}, links[q][1]);
+							else
+								a({href="/" .. (links[q][2])}, links[q][1]);
+							end
 						end
 					end)
 				end
