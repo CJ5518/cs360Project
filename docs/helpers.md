@@ -5,8 +5,8 @@
 Usage:
 
 ```lua
-local email = require("helpers.email");
-local out, res = email.send_email("address@gmail.com", "Subject", "Body");
+local send_email = require("helpers.email").send_email;
+local out, res = send_email("address@gmail.com", "Subject", "Body");
 ```
 
 
