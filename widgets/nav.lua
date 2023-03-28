@@ -13,28 +13,22 @@ local links = {
 --Dunno man don't ask
 local modeIsDev = true;
 
+
+
 function nav_mt:content()
-	if self.session.userInfo then
+	if self.user then
 		table.insert(links, 2, {"Dashboard", "dashboard"});
 	end
+	raw("<script>console.log(window.location.href);</script>")
 	div({class = "navigation"}, function() 
 		div({class = "nav-inner"}, function() 
 			ul({class = "nav-list"}, function()
 				for q = 1, #links do
 					li(function()
-						if not modeIsDev then
-							if q == 1 then
-								a({class='active', href=self:url_for(links[q][2])}, links[q][1]);
-							else
-								a({href=self:url_for(links[q][2])}, links[q][1]);
-							end
-
+						if modeIsDev then
+							a({href="/" .. (links[q][2]), class = (self.route_name:find(links[q][2]) and 'active' or '')}, links[q][1]);
 						else
-							if q == 1 then
-								a({class='active', href="/" .. (links[q][2])}, links[q][1]);
-							else
-								a({href="/" .. (links[q][2])}, links[q][1]);
-							end
+							text("Hey what's up this shouldn't be nav.lua");
 						end
 					end)
 				end

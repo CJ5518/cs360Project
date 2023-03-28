@@ -10,6 +10,10 @@ local accounts = require("helpers.accounts");
 -- Routes that kind of go to pages but have some other stuff going on --
 --------------------------------------------------
 
+app:before_filter(function(self)
+	self.user = accounts.isLoggedIn(self);
+end)
+
 app:get("editUserInfo", "/editUserInfo", function(self)
 	return self:html(function()
 		local editUserInfoFormWidget = require("widgets.editUserInfoForm");
@@ -49,6 +53,20 @@ end)
 app:match("/service/:service_id", function(self)
 	self.service_id = self.params.service_id;
 	return {render = "servicePage"}
+end)
+
+
+app:get("serviceCalc", "/serviceCalc", function(self)
+	return {render = "serviceCalc"};
+end)
+app:get("affordCalc", "/affordCalc", function(self)
+	return {render = "affordCalc"};
+end)
+app:get("serviceSearch", "/serviceSearch", function(self)
+	return {render = "serviceSearch"};
+end)
+app:get("editHomeInfo", "/editHomeInfo", function(self)
+	return {render = "editHomeInfo"};
 end)
 
 --A catch-all, probably not good for prod but easy for adding lots of new pages
