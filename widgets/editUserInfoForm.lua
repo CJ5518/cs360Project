@@ -1,10 +1,11 @@
 local Widget = require("lapis.html").Widget
 local Users = require("models.Users");
+local accounts = require("helpers.accounts");
 
 local editUserInfoForm, editUserInfoForm_mt = Widget:extend("editUserInfoForm")
 
 function editUserInfoForm_mt:content()
-	local user = Users:find(self.session.userID);
+	local user = accounts.isLoggedIn(self);
 	local function doForm()
 		local function inputTextEasy(id, lab, required, placeholder, type, readonly)
 			type = type or "text"
@@ -23,9 +24,8 @@ function editUserInfoForm_mt:content()
 			inputTextEasy("LastName", "Last Name", true, user.LastName);
 			inputTextEasy("PhoneNumber", "Phone Number", false, user.PhoneNumber);
 			inputTextEasy("AnnualIncome", "Annual Income", true, user.AnnualIncome, "number");
-		
-			button({type="submit", class="btn btn-primary"}, "Submit");
 		end)
+		button({id="editUserInfoFormButton", class="btn btn-primary"}, "Submit");
 	end
 	if self.onlyForm then
 		doForm();

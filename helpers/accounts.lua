@@ -39,8 +39,14 @@ function accounts.isLoggedIn(self)
 	end
 end
 
-function accounts.tryNewUser(self, email, pass, type)
-
+--- Make a new user. DOESN'T check if the user already exists
+--@tparam self - self object containing self.session
+--@treturn User/Vendor user - returns the newly logged in user object, or nil
+function accounts.makeNewUser(self, email, pass, type)
+	if type == "User" then
+		Users:new(email, pass);
+		return accounts.tryLogIn(self, email, pass, type);
+	end
 end
 
 --@tparam self - self object containing self.session

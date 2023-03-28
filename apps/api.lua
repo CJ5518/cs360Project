@@ -11,7 +11,24 @@ local accounts = require("helpers.accounts");
 --Signing up
 
 app:post("signupAction", "/signupAction", function(self)
-	
+	self:write(self.POST.userType);
+	if self.POST.userType == "Vendor" then
+		self:write("Woopsie! Vendorski areski notski allowedski yetski!");
+	else
+		if Users:exists_email(self.POST.email) then
+			--Somebody with that email already exists
+			return {
+				status = 401,
+				json = {
+					message = "A user already exists with that email"
+				}
+			};
+		else
+			--We are good to make the account
+			local user = accounts.makeNewUser(self, self.POST.email, self.POST.password, self.POST.userType);
+			self:write(tostring(user.UserID));
+		end
+	end
 end)
 
 
