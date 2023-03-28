@@ -39,7 +39,11 @@ end)
 -- Logging in and out
 
 app:post("loginAction", "/loginAction", function(self)
-	local user = accounts.tryLogIn(self, self.POST.email, self.POST.password, "User");
+	local user;
+	local succ, msg = pcall(function()
+	user = accounts.tryLogIn(self, self.POST.email, self.POST.password, "User");
+	end)
+	print(succ, msg);
 	if not user then
 		return {
 			status = 401
