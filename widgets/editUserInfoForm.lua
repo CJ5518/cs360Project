@@ -24,8 +24,9 @@ function editUserInfoForm_mt:content()
 			inputTextEasy("LastName", "Last Name", true, user.LastName);
 			inputTextEasy("PhoneNumber", "Phone Number", false, user.PhoneNumber);
 			inputTextEasy("AnnualIncome", "Annual Income", true, user.AnnualIncome, "number");
+		
+			button({type="submit", class="btn btn-primary"}, "Submit");
 		end)
-		button({id="editUserInfoFormButton", class="btn btn-primary"}, "Submit");
 	end
 	if self.onlyForm then
 		doForm();

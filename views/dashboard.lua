@@ -20,7 +20,7 @@ function Dashboard_mt:content()
 		end
 		div({class = "container"}, function()
 			rowAndCol(function() h3({class = "mb-3"},"Hello new user, let's get you set up"); end)
-			form({action = "/updateUserInfo", method = "post"}, function() 
+			form({action = "/updateUserInfoAction", method = "post"}, function() 
 				local editUserInfoFormWidget = require("widgets.editUserInfoForm");
 				widget(editUserInfoFormWidget({
 					onlyForm = true,

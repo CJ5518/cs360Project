@@ -58,8 +58,8 @@ end)
 --Updating user info
 
 app:post("updateUserInfoAction", "/updateUserInfoAction", function(self)
-	if self.session.isLoggedIn then
-		local user = Users:find(self.session.userID);
+	local user = accounts.isLoggedIn(self);
+	if user then
 		user.FirstName = self.POST.FirstName == "" and user.FirstName or self.POST.FirstName;
 		user.LastName = self.POST.LastName == "" and user.LastName or self.POST.LastName;
 		user.PhoneNumber = self.POST.PhoneNumber == "" and user.PhoneNumber or self.POST.PhoneNumber;
@@ -67,7 +67,7 @@ app:post("updateUserInfoAction", "/updateUserInfoAction", function(self)
 		user:update("FirstName", "LastName", "PhoneNumber", "AnnualIncome");
 		return {redirect_to = "/dashboard"};
 	else
-		self:write("Something went wrong, sorry! (updateUserInfo)");
+		self:write("Something went wrong, sorry! (updateUserInfoAction)");
 	end
 end)
 
