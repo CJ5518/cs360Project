@@ -7,6 +7,7 @@ local Users = require("models.Users");
 local accounts = require("helpers.accounts");
 local getRandomString = require("helpers.randomString").getRandomString;
 
+-- I don't think the top-level before filter worked, it might but it's whatever
 app:before_filter(function(self)
 	self.user = accounts.isLoggedIn(self);
 end)
@@ -15,7 +16,6 @@ end)
 --Signing up
 
 app:post("signupAction", "/signupAction", function(self)
-	self:write(self.POST.userType);
 	if self.POST.userType == "Vendor" then
 		self:write("Woopsie! Vendorski areski notski allowedski yetski!");
 	else
@@ -29,7 +29,7 @@ app:post("signupAction", "/signupAction", function(self)
 			};
 		else
 			--We are good to make the account
-			local user = accounts.makeNewUser(self, self.POST.email, self.POST.password, self.POST.userType);
+			local user = accounts.makeNewAccount(self, self.POST.email, self.POST.password, self.POST.userType);
 			return {redirect_to = "/dashboard"};
 		end
 	end
@@ -51,15 +51,14 @@ app:post("loginAction", "/loginAction", function(self)
 	end
 end)
 
+--Log out
+
 app:match("logout", "/logout", function(self)
 	accounts.logOut(self);
 end)
 
------------------------------------------------------------------------------------------------
 
-
-
------------------------------------------------------------------------------------------------
+-- Reset password
 
 app:post("passwordResetRequest", "/passwordResetRequest", function(self)
 	local email = self.POST.email;

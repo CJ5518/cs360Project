@@ -39,10 +39,24 @@ function accounts.isLoggedIn(self)
 	end
 end
 
---- Make a new user. DOESN'T check if the user already exists
+--- Make a new account. DOESN'T check if the account already exists
 --@tparam self - self object containing self.session
---@treturn User/Vendor user - returns the newly logged in user object, or nil
-function accounts.makeNewUser(self, email, pass, type)
+--@tparam self - self object containing self.session
+--@treturn User/Vendor account - returns the found account type object
+function accounts.checkIfEmailIsTaken(self, email, type)
+	if type == "User" then
+
+	elseif type == "Vendor" then
+
+	else
+		error("Bad arg to accounts.checkIfEmailIsTaken");
+	end
+end
+
+--- Make a new account. DOESN'T check if the account already exists
+--@tparam self - self object containing self.session
+--@treturn User/Vendor account - returns the newly logged in user/vendor object, or nil
+function accounts.makeNewAccount(self, email, pass, type)
 	if type == "User" then
 		Users:new(email, pass);
 		return accounts.tryLogIn(self, email, pass, type);
