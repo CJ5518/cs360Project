@@ -11,7 +11,7 @@ local accounts = require("helpers.accounts");
 --------------------------------------------------
 
 app:before_filter(function(self)
-	self.user = accounts.isLoggedIn(self);
+	self.account = accounts.isLoggedIn(self);
 end)
 
 app:get("editUserInfo", "/editUserInfo", function(self)

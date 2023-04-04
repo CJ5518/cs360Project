@@ -9,27 +9,20 @@ local links = {
 	{"Service Search", "serviceSearch"},
 	{"Edit Home Info", "editHomeInfo"}
 }
-
---Dunno man don't ask
-local modeIsDev = true;
-
-
-
 function nav_mt:content()
-	if self.user then
+	if self.account then
 		table.insert(links, 2, {"Dashboard", "dashboard"});
 	end
-	raw("<script>console.log(window.location.href);</script>")
+	
 	div({class = "navigation"}, function() 
 		div({class = "nav-inner"}, function() 
 			ul({class = "nav-list"}, function()
 				for q = 1, #links do
 					li(function()
-						if modeIsDev then
-							a({href="/" .. (links[q][2]), class = (self.route_name:find(links[q][2]) and 'active' or '')}, links[q][1]);
-						else
-							text("Hey what's up this shouldn't be nav.lua");
-						end
+						--Unreadable hunk of junk don't worry about it
+						--Sets class to active if this 
+						local classMaybe = self.route_name and (self.route_name:find(links[q][2]) and 'active' or '') or '';
+						a({href="/" .. (links[q][2]), class = classMaybe}, links[q][1]);
 					end)
 				end
 			end)

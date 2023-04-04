@@ -9,7 +9,7 @@ local getRandomString = require("helpers.randomString").getRandomString;
 
 -- I don't think the top-level before filter worked, it might but it's whatever
 app:before_filter(function(self)
-	self.user = accounts.isLoggedIn(self);
+	self.account = accounts.isLoggedIn(self);
 end)
 
 
