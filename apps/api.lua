@@ -4,6 +4,7 @@ local app = lapis.Application();
 local db = require("lapis.db");
 local send_email = require("helpers.email").send_email;
 local Users = require("models.Users");
+local Vendors = require("models.Vendors");
 local accounts = require("helpers.accounts");
 local getRandomString = require("helpers.randomString").getRandomString;
 
@@ -16,23 +17,29 @@ end)
 --Signing up
 
 app:post("signupAction", "/signupAction", function(self)
+	--Check if this email is already in use
+	local isOtherUser = false;
 	if self.POST.userType == "Vendor" then
-		self:write("Woopsie! Vendorski areski notski allowedski yetski!");
+		isOtherUser = Vendors:exists_email(self.POST.email)
+	elseif self.POST.userType == "User" then
+		isOtherUser = Users:exists_email(self.POST.email)
 	else
-		if Users:exists_email(self.POST.email) then
-			--Somebody with that email already exists
-			return {
-				status = 401,
-				json = {
-					message = "A user already exists with that email"
-				}
-			};
-		else
-			--We are good to make the account
-			local user = accounts.makeNewAccount(self, self.POST.email, self.POST.password, self.POST.userType);
-			return {redirect_to = "/dashboard"};
-		end
+		error("Bad POST data to signupAction, userType is bad");
 	end
+
+	--If in use, return error code
+	if isOtherUser then
+		return {
+			status = 401,
+			json = {
+				message = "A user already exists with that email"
+			}
+		};
+	end
+
+	--Otherwise, make a new account and send them to the dashboard
+	local user = accounts.makeNewAccount(self, self.POST.email, self.POST.password, self.POST.userType);
+	return {redirect_to = "/dashboard"};
 end)
 
 
@@ -41,7 +48,7 @@ end)
 app:post("loginAction", "/loginAction", function(self)
 	local user;
 	local succ, msg = pcall(function()
-	user = accounts.tryLogIn(self, self.POST.email, self.POST.password, "User");
+	user = accounts.tryLogIn(self, self.POST.email, self.POST.password, self.POST.userType);
 	end)
 	print(succ, msg);
 	if not user then
@@ -68,7 +75,7 @@ app:post("passwordResetRequest", "/passwordResetRequest", function(self)
 	local email = self.POST.email;
 	local user = Users:find({["email"] = email});
 	if user then
-		--TODO (Maybe)
+		--TODO (Maybe) (I think this was (adjust dumbness))
 		--Send them a new password
 		user.Password = getRandomString(30);
 		local out, res = send_email(email, "MyHome - Password Reset", "Here's your new password: " .. user.Password);
@@ -80,7 +87,7 @@ app:post("passwordResetRequest", "/passwordResetRequest", function(self)
 					message = "An email has been sent to the address you entered"
 				}
 			}
-		else
+		else --Message did not send
 			return {
 				status = 500
 			}

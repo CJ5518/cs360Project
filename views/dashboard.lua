@@ -8,6 +8,7 @@ local accounts = require("helpers.accounts");
 --<button onclick="location.href='/logout'">logout</button>
 
 function Dashboard_mt:content()
+	render("widgets.nav");
 	local user = accounts.isLoggedIn(self);
 	--TODO, this is just used as the way to check if the user has set up their profile
 	if not user.FirstName then
@@ -18,10 +19,13 @@ function Dashboard_mt:content()
 				end)
 			end)
 		end
+		local function formatAccount(str)
+			return str:format(accounts.getAccountType(self));
+		end
 		div({class = "container"}, function()
-			rowAndCol(function() h3({class = "mb-3"},"Hello new user, let's get you set up"); end)
-			form({action = "/updateUserInfoAction", method = "post"}, function() 
-				local editUserInfoFormWidget = require("widgets.editUserInfoForm");
+			rowAndCol(function() h3({class = "mb-3"},formatAccount("Hello new %s, let's get you set up")); end)
+			form({action = formatAccount("/update%sInfoAction"), method = "post"}, function() 
+				local editUserInfoFormWidget = require(formatAccount("widgets.edit%sInfoForm"));
 				widget(editUserInfoFormWidget({
 					onlyForm = true,
 					editPassword = false
