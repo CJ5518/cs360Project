@@ -146,8 +146,10 @@ end)
 
 --Accepts POST data in the form
 --self.POST.Address = "123 Fake Street";
---self.POST.NewHome = true; --IF you want to make a new home
-app:post("homes", "homes/", function(self)
+--self.POST.NewHome = "true"; --IF you want to make a new home
+app:post("homes", "/homes", function(self)
+	--return {json = {message = "Hello?"}};
+	print("HERE");
 	--TODO (finish)
 	local data = self.POST;
 
@@ -162,8 +164,10 @@ app:post("homes", "homes/", function(self)
 	if not (accounts.getAccountType(self) == "User") then
 		return {status = 401};
 	end
-
-	local home = Homes:find(data.HomeID);
+	local home;
+	if data.HomeID then
+		local home = Homes:find(data.HomeID);
+	end
 	--Editing home but couldn't find the given id
 	if not home and not data.NewHome then
 		return {status = 404};
@@ -193,7 +197,7 @@ app:post("homes", "homes/", function(self)
 	end
 end)
 
-app:delete("homes", "homes/", function(self)
+app:delete("homes", "/homes", function(self)
 	--TODO
 
 end)

@@ -1,4 +1,26 @@
 <% render("widgets.nav") %>
 <h1>Edit Home Information</h1>
 
-Coming Soon
+
+<form id="editHomeInfoForm">
+	<%
+	--Generate the form elements
+	local homesHelper = require("helpers.homes");
+	for q = 1, #homesHelper.fieldsWithoutIDs do
+		local name, type = homesHelper.fieldsWithoutIDs[q][1], homesHelper.fieldsWithoutIDs[q][2];
+		local newFieldValue = "text";
+		if type == "int" then
+			newFieldValue = "number"
+		end
+		element("div", {class = "mb-3"}, function()
+			element("label", {["for"] = name}, name);
+			element("input", {["type"] = newFieldValue, id=name, ["name"] = name, required = true, class="form-control"});
+		end)
+	end
+	
+	%>
+</form>
+
+<button id="submitButton">Submit</button>
+
+<script src="/static/js/editHomeInfo.js"></script>
