@@ -1,5 +1,5 @@
 $("#logoutButton").click(function(){
-	console.log("HERE");
+	console.log("logoutButtonClick");
 	$.ajax({
 		method: "POST",
 		url: "/logout"

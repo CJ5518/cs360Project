@@ -7,11 +7,14 @@ local accounts = require("helpers.accounts");
 --<button>Edit Profile Information</button>
 --<button onclick="location.href='/logout'">logout</button>
 
+--This one is called for both vendors and users so needs to swap between the two
 function Dashboard_mt:content()
 	render("widgets.nav");
 	local user = accounts.isLoggedIn(self);
+	local userType = accounts.getAccountType(self);
 	--TODO, this is just used as the way to check if the user has set up their profile
-	if not user.FirstName then
+	--Fair enough if you ask me, lowest of priorities
+	if (userType == "User" and not user.FirstName) or (userType == "Vendor" and not user.CompanyName) then
 		local function rowAndCol(func)
 			div({class = "row"}, function()
 				div({class = "col"}, function()
@@ -25,8 +28,9 @@ function Dashboard_mt:content()
 		div({class = "container"}, function()
 			rowAndCol(function() h3({class = "mb-3"},formatAccount("Hello new %s, let's get you set up")); end)
 			form({action = formatAccount("/update%sInfoAction"), method = "post"}, function() 
-				local editUserInfoFormWidget = require(formatAccount("widgets.edit%sInfoForm"));
-				widget(editUserInfoFormWidget({
+				--Very dumb, but it switches between user and vendor setup forms
+				local editAccountInfoFormWidget = require(formatAccount("widgets.edit%sInfoForm"));
+				widget(editAccountInfoFormWidget({
 					onlyForm = true,
 					editPassword = false
 				}));
@@ -34,14 +38,17 @@ function Dashboard_mt:content()
 		end)
 		
 
-	else --This is NOT the user's first time here
-		
-		h1("Hello " .. user.FirstName);
+	else --This is NOT the account's first time here
+		--i.e the normal dasboard
+
+		local name = userType == "User" and user.FirstName or user.CompanyName;
+
+		h1("Hello " .. name);
 		div({class = "body"}, function()
 			text "Welcome to my site!"
 		end)
-		button({id = "logoutButton"}, "Log out");
-		raw('<script src="/static/js/dashboardLoggedIn.js"></script>');
+		widget(require("widgets.logoutButton"));
+
 	end
 end
 

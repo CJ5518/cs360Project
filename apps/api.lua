@@ -129,13 +129,10 @@ end)
 --TODO (Make it work for vendors, file uploads)
 --Very broken try not to use
 app:post("updateVendorInfoAction", "/updateVendorInfoAction", function(self)
-	local user = accounts.isLoggedIn(self);
-	if user then
-		user.CompanyName = self.POST.FirstName == "" and user.FirstName or self.POST.FirstName;
-		user.LastName = self.POST.LastName == "" and user.LastName or self.POST.LastName;
-		user.PhoneNumber = self.POST.PhoneNumber == "" and user.PhoneNumber or self.POST.PhoneNumber;
-		user.AnnualIncome = self.POST.AnnualIncome == "" and user.AnnualIncome or self.POST.AnnualIncome;
-		user:update("FirstName", "LastName", "PhoneNumber", "AnnualIncome");
+	if self.account and accounts.getAccountType(self) == "Vendor" then
+		self.account.CompanyName = self.POST.CompanyName == "" and self.account.CompanyName or self.POST.CompanyName;
+		self.account.PhoneNumber = self.POST.PhoneNumber == "" and self.account.PhoneNumber or self.POST.PhoneNumber;
+		self.account:update("PhoneNumber", "CompanyName");
 		return {redirect_to = "/dashboard"};
 	else
 		self:write("Something went wrong, sorry! (updateVendorInfoAction)");

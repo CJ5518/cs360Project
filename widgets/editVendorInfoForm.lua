@@ -20,8 +20,7 @@ function editVendorInfoForm_mt:content()
 		form({action = "/updateVendorInfoAction", method = "post"}, function()
 			--TODO
 			--inputTextEasy("Password", "Password (Not implemented yet sorry)", false, "", "password", self.editPassword);
-			inputTextEasy("CompanyName", "Company Name", true, user.FirstName);
-			inputTextEasy("LastName", "Last Name", true, user.LastName);
+			inputTextEasy("CompanyName", "Company Name", true, user.CompanyName);
 			inputTextEasy("PhoneNumber", "Phone Number", false, user.PhoneNumber);
 		
 			button({type="submit", class="btn btn-primary"}, "Submit");
