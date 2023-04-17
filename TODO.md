@@ -2,10 +2,10 @@
 - [ ] The two calculators (Cole)
 
 
-- [ ] Home adding interface (WIP) (Carson)
-- [ ] Home editing/adding difference
-- [ ] Display homes on dashboard
-- [ ] Deleting homes
+- [X] Home adding interface (WIP) (Carson)
+- [X] Home editing/adding difference
+- [X] Display homes on dashboard
+- [X] Deleting homes
 
 
 
