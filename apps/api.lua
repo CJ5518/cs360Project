@@ -144,29 +144,26 @@ end)
 --Accepts POST data in the form
 --self.POST.Address = "123 Fake Street";
 --self.POST.NewHome = "true"; --IF you want to make a new home
+--self.POST.HomeID = 7; --Home id to edit
 app:post("homes", "/homes", function(self)
 	--return {json = {message = "Hello?"}};
 	print("HERE");
 	--TODO (finish)
 	local data = self.POST;
+	data.HomeID = tonumber(data.HomeID)
 
 	--Does this home exist?
 
-	--Bad update request
-	if (not data.HomeID or data.HomeID < 0) and not data.NewHome then
-		return {status = 400};
-	end
-
-	--Only users get to add homes
+	--Only users get to deal with homes
 	if not (accounts.getAccountType(self) == "User") then
 		return {status = 401};
 	end
 	local home;
 	if data.HomeID then
-		local home = Homes:find(data.HomeID);
+		home = Homes:find(data.HomeID);
 	end
 	--Editing home but couldn't find the given id
-	if not home and not data.NewHome then
+	if not home and data.NewHome == "false" then
 		return {status = 404};
 	end
 
@@ -186,7 +183,7 @@ app:post("homes", "/homes", function(self)
 		updateTable[name] = newFieldValue;
 	end
 	--If just updating
-	if not data.NewHome then
+	if data.NewHome == "false" then
 		home:update(updateTable);
 	else --Making new home
 		updateTable["HomeOwner"] = self.account.UserID; --We make sure we are logged in as user beforehand
@@ -196,7 +193,8 @@ end)
 
 app:delete("homes", "/homes", function(self)
 	--TODO
-
+	local home = Homes:find(tonumber(self.POST.HomeID));
+	home:delete();
 end)
 
 return app;

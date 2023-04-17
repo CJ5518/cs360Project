@@ -48,6 +48,7 @@ function Dashboard_mt:content()
 		div({class = "body"}, function()
 			text "Welcome to my site!"
 		end)
+		raw('<script src="/static/js/homeBoxScript.js"></script>');
 		widget(require("widgets.logoutButton"));
 
 		--How many comparisons have we already done on this variable?
