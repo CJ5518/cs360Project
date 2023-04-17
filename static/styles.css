@@ -55,6 +55,12 @@ a.unstyled {
 	width: 100px;
 }
 
+/* home box widget */
+.home-box {
+	border:1px solid black;
+	width: 100px;
+}
+
 .horizontal-list {
 	list-style-type: none; /* Remove bullets */
 }

@@ -1,8 +1,9 @@
 local Widget = require("lapis.html").Widget
 
 local Dashboard, Dashboard_mt = Widget:extend("Dashboard")
-local Users = require("models.Users");
+local Homes = require("models.Homes");
 local accounts = require("helpers.accounts");
+local util = require("lapis.util")
 
 --<button>Edit Profile Information</button>
 --<button onclick="location.href='/logout'">logout</button>
@@ -49,6 +50,20 @@ function Dashboard_mt:content()
 		end)
 		widget(require("widgets.logoutButton"));
 
+		--How many comparisons have we already done on this variable?
+		--No matter, different dashboards for each
+		if userType == "User" then --USER
+			local homes = Homes:select("WHERE HomeOwner = ?", user.UserID, {fields = "HomeID"});
+			h3("My homes");
+			div({class = "homes-display horizontal-list"}, function()
+				for i, v in pairs(homes) do
+					li(function() widget(require("widgets.homeBox")({HomeID = v.HomeID})) end)
+				end
+			end)
+		else
+			--VENDOR dashboard
+			--TODO
+		end
 	end
 end
 

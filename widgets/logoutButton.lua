@@ -5,7 +5,7 @@ local logoutButton, logoutButton_mt = Widget:extend("logoutButton")
 
 function logoutButton_mt:content()
 	button({id = "logoutButton"}, "Log out");
-	raw('<script src="/static/js/dashboardLoggedIn.js"></script>');
+	raw('<script src="/static/js/logoutButtonScript.js"></script>');
 end
 
 return logoutButton
