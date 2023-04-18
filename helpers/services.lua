@@ -3,7 +3,7 @@
 local module = {};
 --Model:columns() exists but I didn't use it
 module.fields = {
-    {"ServiceID", "int"}
+    {"ServiceID", "int"},
     {"ServiceOwner", "int"}, 
     {"Name", "string"},
     {"Description", "string"},
@@ -64,7 +64,7 @@ module.typeFields = {
 
 	},
 	["television"] = { --television
-		{"type", "string", "streaming", "live"}
+		{"type", "string", "streaming", "live"} -- note that this string field includes options
 	},
 	["electricity"] = { --electricity
 

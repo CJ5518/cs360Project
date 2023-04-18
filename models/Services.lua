@@ -4,7 +4,4 @@ local Services, Services_mt = Model:extend("Services", {
 	primary_key = "ServiceID"
 });
 
-
-
-
 return Services;

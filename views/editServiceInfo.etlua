@@ -7,7 +7,26 @@ var HomeID = <%= GET.HomeID %>;
 
 <form id="editSerbiceInfoForm">
 	<%
+	local Services = require("models.Services");
+	--Generate the form elements
+	local servicesHelper = require("helpers.services");
+	local service;
 	
+	pcall(function() service = Services:find(GET.ServiceID); end)
+	if not service then
+		service = {};
+	end
+	for q = 1, #servicesHelper.fieldsWithoutIDsOrGenerics do
+		local name, type = servicesHelper.fieldsWithoutIDsOrGenerics[q][1], servicesHelper.fieldsWithoutIDsOrGenerics[q][2];
+		local newFieldValue = "text";
+		if type == "int" then
+			newFieldValue = "number"
+		end
+		element("div", {class = "mb-3"}, function()
+			element("label", {["for"] = name}, name);
+			element("input", {["type"] = newFieldValue, id=name, ["name"] = name, required = true, class="form-control", value = service[name]});
+		end)
+	end
 	%>
 </form>
 
