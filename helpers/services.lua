@@ -72,9 +72,9 @@ module.typeFields = {
 }
 
 --Version of the above without q=1 or q=2, which are the two ids
---Or any of the generic field items
+--Or any of the generic field items, or PriceUnitIDs or service type id
 module.fieldsWithoutIDsOrGenerics = {};
-for q = 3, #module.fields-9 do
+for q = 3, #module.fields-11 do
 	module.fieldsWithoutIDsOrGenerics[q-2] = module.fields[q];
 end
 

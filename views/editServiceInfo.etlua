@@ -16,6 +16,7 @@ var HomeID = <%= GET.HomeID %>;
 	if not service then
 		service = {};
 	end
+	--Basic items
 	for q = 1, #servicesHelper.fieldsWithoutIDsOrGenerics do
 		local name, type = servicesHelper.fieldsWithoutIDsOrGenerics[q][1], servicesHelper.fieldsWithoutIDsOrGenerics[q][2];
 		local newFieldValue = "text";
@@ -28,6 +29,17 @@ var HomeID = <%= GET.HomeID %>;
 		end)
 	end
 	%>
+	<div class = "mb-3">
+		<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control">
+			<%
+				for q = 1, #servicesHelper.types do
+				--TODO format this string like autoInsurance -> Auto Insurance
+					element("option", {value=tostring(q)}, servicesHelper.types[q]);
+				end
+			%>
+		</select>
+	</div>
+	
 </form>
 
 <button id="submitButton">Submit</button>
