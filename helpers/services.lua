@@ -21,10 +21,61 @@ module.fields = {
     {"Field9", "string"}
 }
 
+module.types = {
+	"internet", -- tab[1] == "internet";
+	"cellphoneService",
+	"lawnCare",
+	"mortgage",
+	"homeownersInsurance",
+	"autoInsurance",
+	"television",
+	"electricity"
+}
+
+--Get the ID of a string type
+function module.getIDFromType(str)
+	for i, v in pairs(module.types) do
+		if v == str then return i end
+	end
+end
+
+--The special fields for all the types
+module.typeFields = {
+	["internet"] = { --Internet
+		{"speed", "int"}, --Name, type (although everything is stored as a string)
+		{"data", "mixed", "unlimited"}
+	},
+	["cellphoneService"] = { --cellphoneService
+		{"data", "mixed", "unlimited"}, --Mixed means both int and string, typically the string will be special and one-of-a-kind
+		{"minutes", "mixed", "unlimited"}, --You can check this third property for the special string(s)
+		{"messages", "mixed", "unlimited"},
+		{"devices", "mixed", "unlimited"}
+	},
+	["lawnCare"] = { --Lawn care
+
+	},
+	["mortgage"] = { --mortgage
+		{"interest", "int"} --Called int by convention, this one should actually be a float or as lua calls it a number
+	},
+	["homeownersInsurance"] = { --homeownersInsurance
+		--I have never dealt with homeownersInsurance in my life
+	},
+	["autoInsurance"] = { --autoInsurance
+
+	},
+	["television"] = { --television
+		{"type", "string", "streaming", "live"}
+	},
+	["electricity"] = { --electricity
+
+	}
+}
+
 --Version of the above without q=1 or q=2, which are the two ids
-module.fieldsWithoutIDs = {};
-for q = 3, #module.fields do
-	module.fieldsWithoutIDs[q-2] = module.fields[q];
+--Or any of the generic field items
+module.fieldsWithoutIDsOrGenerics = {};
+for q = 3, #module.fields-9 do
+	module.fieldsWithoutIDsOrGenerics[q-2] = module.fields[q];
 end
 
 return module;

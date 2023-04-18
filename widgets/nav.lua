@@ -6,8 +6,7 @@ local links = {
 	{"Home", "index"},
 	{"Service Calculator", "serviceCalc"},
 	{"Affordability Calculator", "affordCalc"},
-	{"Service Search", "serviceSearch"},
-	{"Edit Home Info", "editHomeInfo"}
+	{"Service Search", "serviceSearch"}
 }
 function nav_mt:content()
 	if self.account then

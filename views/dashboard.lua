@@ -54,6 +54,8 @@ function Dashboard_mt:content()
 		--How many comparisons have we already done on this variable?
 		--No matter, different dashboards for each
 		if userType == "User" then --USER
+			--Add the create new home button
+			raw([[<br><button onclick="window.location.href = '/editHomeInfo';">Create New Home</button><br>]]);
 			local homes = Homes:select("WHERE HomeOwner = ?", user.UserID, {fields = "HomeID"});
 			h3("My homes");
 			div({class = "homes-display horizontal-list"}, function()
@@ -64,6 +66,7 @@ function Dashboard_mt:content()
 		else
 			--VENDOR dashboard
 			--TODO
+			raw([[<br><button onclick="window.location.href = '/editServiceInfo';">Create New Service</button><br>]]);
 		end
 	end
 end
