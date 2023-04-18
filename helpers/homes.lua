@@ -1,7 +1,7 @@
 --Homes helper
 
 local module = {};
-
+--Model:columns() exists but I didn't use it
 module.fields = {
 	{"HomeID", "int"}, -- INTEGER PRIMARY KEY,
     {"HomeOwner", "int"}, -- INTEGER,

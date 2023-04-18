@@ -50,6 +50,7 @@ end)
 app:post("loginAction", "/loginAction", function(self)
 	local user;
 	local succ, msg = pcall(function()
+	print(string.format("_%s_%s_%s_", self.POST.userType, self.POST.email, self.POST.password));
 	user = accounts.tryLogIn(self, self.POST.email, self.POST.password, self.POST.userType);
 	end)
 	print(succ, msg);

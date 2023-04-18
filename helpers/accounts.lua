@@ -86,6 +86,7 @@ function accounts.tryLogIn(self, email, pass, type)
 		self.session.current_user = {};
 		self.session.current_user.UserID = user.VendorID;
 		self.session.current_user.Type = "Vendor";
+		return user;
 	else
 		error("Bad type pass to account.tryLogIn: " .. tostring(type));
 	end

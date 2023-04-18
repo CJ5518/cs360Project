@@ -31,3 +31,11 @@ CREATE TABLE Vendors (
     Description varchar(2048),
     LogoFilePath varchar(255)
 );
+CREATE TABLE Services (
+    ServiceID INTEGER PRIMARY KEY,
+    ServiceOwner INTEGER,
+    Name varchar(255),
+    Description varchar(2048),
+    PricePerUnit int,
+    PriceUnit int
+)
