@@ -1,0 +1,16 @@
+<% render("widgets.nav") %>
+<h1>Edit Home Information</h1>
+
+<script>
+var HomeID = <%= GET.HomeID %>;
+</script>
+
+<form id="editSerbiceInfoForm">
+	<%
+	
+	%>
+</form>
+
+<button id="submitButton">Submit</button>
+
+<script src="/static/js/editServiceInfo.js"></script>
