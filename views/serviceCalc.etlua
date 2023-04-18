@@ -1,8 +1,131 @@
+<head>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+
 <% render("widgets.nav") %>
 <h1>Service Calculator</h1>
 
-<h3>Coming Soon</h3>
+<div>
+    <form id="service-select">
+        <label for="service-type">Select Service: </label>
+        <select id="service-selector" name="service-type">
+            <option name="internet">Internet</option>
+            <option name="phone">Phone/Cell</option>
+            <option name="tv">Cable/TV</option>
+            <option name="water">Water</option>
+            <option name="sewage">Sewage</option>
+            <option name="garbage">Garbage</option>
+            <option name="gas">Gas</option>
+            <option name="electricity">Electricity</option>
+            <option name="lawn">Lawncare</option>
+            <option name="mortgage">Mortgage</option>
+            <option name="homeowners-insurance">Homeowners' Insurance</option>
+            <option name="auto-insurance">Auto Insurance</option>
+        </select>
 
-<p>1) Input: Service Type</p>
-<p>2) Input: Relevant Info</p>
-<p>3) Return: Best Service</p>
+        <input id="cont" type="button" value="Continue">
+    </form>
+
+</div>
+
+<div>
+    <form id="internet-form" class="service-calc-form">
+        <label for="devices">Number of Devices: </label>
+        <input name="devices" type="number" min="0">
+
+        <label for="games">Do you play online videogames?: </label>
+        <select id="games-selector" name="games">
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+        </select>
+
+        <label for="stream">Do you stream online shows/movies?: </label>
+        <select id="stream-selector" name="stream">
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+        </select>
+    </form>
+
+    <form id ='phone-form'>
+        <label for="data">Roaming data: </label>
+        <select id="data-selector" name="data">
+            <option name="<5">Less than 5G</option>
+            <option name="<10">Less than 10G</option>
+            <option name="<20">Less than 20G</option>
+            <option name="<50">Less than 50G</option>
+            <option name="unlimited">Unlimited</option>
+        </select>
+
+        <label for="talk/text">Talk/Text: </label>
+        <select id="talk/text-selector" name="talk/text">
+            <option name="unlimited">Unlimited</option>
+            <option name="limited">Limited</option>
+        </select>
+
+        <label for="covergae">Coverage: </label>
+        <select id="coverage-selector" name="coverage">
+            <option name="nationwide">Nationwide (USA)</option>
+            <option name="global">Global</option>
+        </select>
+    </form>
+
+    
+    <input id="calculate" type="button" value="Calculate">
+</div>
+
+<div id="result-div">
+    <p>Result</p>
+</div>
+
+<script>
+
+const internet_form = document.getElementById('internet-form');
+const phone_form = document.getElementById('phone-form');
+const service_selector = document.getElementById('service-selector');
+const cont = document.getElementById('cont');
+const calculate = document.getElementById('calculate');
+const result = document.getElementById('result-div');
+
+internet_form.style.display = 'none';   // hide internet form
+phone_form.style.display = 'none';
+calculate.style.display = 'none';   //hide calc button
+result.style.display = 'none';   //hide result
+
+cont.addEventListener('click', () => {
+    if (service_selector.value == 'Internet') {
+        if (internet_form.style.display === 'none') {
+            internet_form.style.display = 'block';    // SHOW the form
+            calculate.style.display = 'block';   //show calc button
+
+            //hide other forms
+            phone_form.style.display = 'none';
+
+            //hide result  
+            result.style.display = 'none';  
+        }
+    }
+});
+
+cont.addEventListener('click', () => {
+    if (service_selector.value == 'Phone/Cell') {
+        if (phone_form.style.display === 'none') {
+            phone_form.style.display = 'block';    // SHOW the form
+            calculate.style.display = 'block';   //show calc button
+
+            //hide other forms
+            internet_form.style.display = 'none';
+
+            //hide result
+            result.style.display = 'none';  
+        }
+    }
+});
+
+calculate.addEventListener('click', () => {
+    if (result.style.display === 'none') {
+        result.style.display = 'block';    // SHOW the result
+    }
+});
+
+</script>
