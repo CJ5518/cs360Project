@@ -1,11 +1,17 @@
 <% render("widgets.nav") %>
-<h1>Edit Home Information</h1>
 
+<%
+if GET.ServiceID then
+	element("h1", "Edit Service Information");
+else
+	element("h1", "Create New Service");
+end
+%>
 <script>
-var HomeID = <%= GET.HomeID %>;
+var ServiceID = <%= GET.ServiceID %>;
 </script>
 
-<form id="editSerbiceInfoForm">
+<form id="editServiceInfoForm">
 	<%
 	local Services = require("models.Services");
 	--Generate the form elements
@@ -30,6 +36,7 @@ var HomeID = <%= GET.HomeID %>;
 	end
 	%>
 	<div class = "mb-3">
+		<%element("label", {["for"] = "serviceTypeSelect"}, "Service type");%>
 		<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control">
 			<%
 				for q = 1, #servicesHelper.types do
@@ -39,7 +46,11 @@ var HomeID = <%= GET.HomeID %>;
 			%>
 		</select>
 	</div>
-	
+	<%
+	--TODO
+	--Add the other elements to this form, Field1, Field2, etc.
+	--style="display: none;" and the 'disabled' attribute to have things in a form but not visible or get sent to the server
+	%>
 </form>
 
 <button id="submitButton">Submit</button>

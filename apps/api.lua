@@ -77,6 +77,7 @@ end)
 
 
 -- Reset password
+--TODO doesn't work, simple as
 
 app:post("passwordResetRequest", "/passwordResetRequest", function(self)
 	local email = self.POST.email;
@@ -192,10 +193,20 @@ app:post("homes", "/homes", function(self)
 	end
 end)
 
+--Delete a home
 app:delete("homes", "/homes", function(self)
-	--TODO
 	local home = Homes:find(tonumber(self.POST.HomeID));
 	home:delete();
+end)
+
+--Create or edit a service, see docs for homes
+app:post("services", "/services", function(self)
+
+end)
+
+--Delete a service
+app:delete("services", "/services", function(self)
+	
 end)
 
 return app;
