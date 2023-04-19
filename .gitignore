@@ -1,3 +1,4 @@
 logs/
 nginx.conf.compiled
 secret/
+wget-log
