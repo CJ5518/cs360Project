@@ -145,12 +145,23 @@ cont.addEventListener('click', () => {
     }
 });
 
-//calculate
+//internet calculate
 calculate.addEventListener('click', () => {
+    calculateService(service_selector.value)
+});
+
+function calculateService(serviceType) {
+    const para = document.createElement("p");
+    const node = document.createTextNode("result");
+    para.appendChild(node);
+    result.appendChild(para);
+
     if (result.style.display === 'none') {
         result.style.display = 'block';    // SHOW the result
     }
-});
+}
+
+
 
 // downpayment 
 // purchase price - downpayment = loan

@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="serviceCalc.css">
+    <link rel="stylesheet" href="static/serviceCalc.css">
 </head>
 
 <% render("widgets.nav") %>
@@ -50,7 +50,20 @@
     </form>
 
     <form id='phone-form' class="service-calc-form">
-       
+       <label for="coverage">Do you frequently make calls to outside the US?: </label>
+        <select id="coverage-selector" name="coverage">
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+        </select>
+
+        <label for="data">How much roaming data do you usually use each month?: </label>
+        <select id="data-selector" name="data">
+            <option name="1-5">1-5 GB</option>
+            <option name="6-10">6-10 GB</option>
+            <option name="11-20">11-20 GB</option>
+            <option name="21-50">21-50 GB</option>
+            <option name="50+">Over 50 GB</option>
+        </select>
     </form>
 
     <form id="lawn-form" class="service-calc-form">
@@ -175,7 +188,7 @@
 </div>
 
 <div id="result-div">
-    <p>Result</p>
+    
 </div>
 
 <script src="static/js/serviceCalc.js"></script>
