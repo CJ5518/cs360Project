@@ -121,6 +121,8 @@ function showForm(serviceType) {
 function calculateService(serviceType) {
     const resultPara = document.getElementById("result-para");
 
+    resultPara.innerHTML = "result";
+
     if (result.style.display === 'none') {
         result.style.display = 'block';    // SHOW the result
     }
