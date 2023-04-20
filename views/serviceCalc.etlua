@@ -188,7 +188,7 @@
 </div>
 
 <div id="result-div">
-    
+    <p id="result-para"></p>
 </div>
 
 <script src="static/js/serviceCalc.js"></script>

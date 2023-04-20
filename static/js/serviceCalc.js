@@ -10,9 +10,6 @@ const auto_insurance_form = document.getElementById('auto-insurance-form');
 const cont = document.getElementById('cont');
 const calculate = document.getElementById('calculate');
 
-const service_selector = document.getElementById('service-selector');
-const result = document.getElementById('result-div');
-
 //hide forms
 internet_form.style.display = 'none';   
 phone_form.style.display = 'none';
@@ -21,13 +18,29 @@ mortgage_form.style.display = 'none';
 ho_insurance_form.style.display = 'none';
 auto_insurance_form.style.display = 'none';
 
+const service_selector = document.getElementById('service-selector');  //establish service selector
+const result = document.getElementById('result-div');  //establish result div
 
 calculate.style.display = 'none';   //hide calc button
 result.style.display = 'none';   //hide result
 
-//internet continue
+//continue button event listener 
 cont.addEventListener('click', () => {
-    if (service_selector.value == 'Internet') {
+    showForm(service_selector.value)
+});
+
+//calculate button event listener
+calculate.addEventListener('click', () => {
+    calculateService(service_selector.value)
+});
+
+//show form function
+function showForm(serviceType) {
+
+    //hide result  
+    result.style.display = 'none';  
+
+    if (serviceType === 'Internet') {
         if (internet_form.style.display === 'none') {
             internet_form.style.display = 'block';    // show the form
             calculate.style.display = 'block';   //show calc button
@@ -38,16 +51,8 @@ cont.addEventListener('click', () => {
             mortgage_form.style.display = 'none';
             ho_insurance_form.style.display = 'none';
             auto_insurance_form.style.display = 'none';
-
-            //hide result  
-            result.style.display = 'none';  
         }
-    }
-});
-
-//phone continue
-cont.addEventListener('click', () => {
-    if (service_selector.value == 'Phone/Cell') {
+    } else if (serviceType === 'Phone/Cell') {
         if (phone_form.style.display === 'none') {
             phone_form.style.display = 'block';    // show the form
             calculate.style.display = 'block';   //show calc button
@@ -58,16 +63,8 @@ cont.addEventListener('click', () => {
             mortgage_form.style.display = 'none';
             ho_insurance_form.style.display = 'none';
             auto_insurance_form.style.display = 'none';
-
-            //hide result
-            result.style.display = 'none';  
         }
-    }
-});
-
-//lawncare continue 
-cont.addEventListener('click', () => {
-    if (service_selector.value == 'Lawncare') {
+    } else if (serviceType === 'Lawncare') {
         if (lawn_form.style.display === 'none') {
             lawn_form.style.display = 'block';    // show the form
             calculate.style.display = 'block';   //show calc button
@@ -77,17 +74,9 @@ cont.addEventListener('click', () => {
             phone_form.style.display = 'none';
             mortgage_form.style.display = 'none';
             ho_insurance_form.style.display = 'none';
-            auto_insurance_form.style.display = 'none';
-
-            //hide result
-            result.style.display = 'none';  
+            auto_insurance_form.style.display = 'none'; 
         }
-    }
-});
-
-//mortgage continue 
-cont.addEventListener('click', () => {
-    if (service_selector.value == 'Mortgage') {
+    } else if (serviceType === 'Mortgage') {
         if (mortgage_form.style.display === 'none') {
             mortgage_form.style.display = 'block';    // show the form
             calculate.style.display = 'block';   //show calc button
@@ -98,16 +87,8 @@ cont.addEventListener('click', () => {
             lawn_form.style.display = 'none';
             ho_insurance_form.style.display = 'none';
             auto_insurance_form.style.display = 'none';
-
-            //hide result
-            result.style.display = 'none';  
         }
-    }
-});
-
-//homeowners' insurance continue 
-cont.addEventListener('click', () => {
-    if (service_selector.value == "Homeowners' Insurance") {
+    } else if (serviceType === "Homeowners' Insurance") {
         if (ho_insurance_form.style.display === 'none') {
             ho_insurance_form.style.display = 'block';    // show the form
             calculate.style.display = 'block';   //show calc button
@@ -118,16 +99,8 @@ cont.addEventListener('click', () => {
             lawn_form.style.display = 'none';
             mortgage_form.style.display = 'none';
             auto_insurance_form.style.display = 'none';
-
-            //hide result
-            result.style.display = 'none';  
         }
-    }
-});
-
-//auto insurance continue
-cont.addEventListener('click', () => {
-    if (service_selector.value == 'Auto Insurance') {
+    } else if (serviceType === 'Auto Insurance') {
         if (auto_insurance_form.style.display === 'none') {
             auto_insurance_form.style.display = 'block';    // show the form
             calculate.style.display = 'block';   //show calc button
@@ -138,23 +111,15 @@ cont.addEventListener('click', () => {
             lawn_form.style.display = 'none';
             mortgage_form.style.display = 'none';
             ho_insurance_form.style.display = 'none';
-
-            //hide result
-            result.style.display = 'none';  
         }
+    } else {
+        console.log('ERROR: Service Not Recognized');
     }
-});
+}
 
-//internet calculate
-calculate.addEventListener('click', () => {
-    calculateService(service_selector.value)
-});
-
+//calculate function
 function calculateService(serviceType) {
-    const para = document.createElement("p");
-    const node = document.createTextNode("result");
-    para.appendChild(node);
-    result.appendChild(para);
+    const resultPara = document.getElementById("result-para");
 
     if (result.style.display === 'none') {
         result.style.display = 'block';    // SHOW the result
