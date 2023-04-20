@@ -2,6 +2,7 @@ local Widget = require("lapis.html").Widget
 
 local Dashboard, Dashboard_mt = Widget:extend("Dashboard")
 local Homes = require("models.Homes");
+local Services = require("models.Services");
 local accounts = require("helpers.accounts");
 local util = require("lapis.util")
 
@@ -57,7 +58,7 @@ function Dashboard_mt:content()
 			--Add the create new home button
 			raw([[<br><button onclick="window.location.href = '/editHomeInfo';">Create New Home</button><br>]]);
 			local homes = Homes:select("WHERE HomeOwner = ?", user.UserID, {fields = "HomeID"});
-			h3("My homes");
+			h3("My Homes");
 			div({class = "homes-display horizontal-list"}, function()
 				for i, v in pairs(homes) do
 					li(function() widget(require("widgets.homeBox")({HomeID = v.HomeID})) end)
@@ -65,8 +66,15 @@ function Dashboard_mt:content()
 			end)
 		else
 			--VENDOR dashboard
-			--TODO
+			--The create new service button
 			raw([[<br><button onclick="window.location.href = '/editServiceInfo';">Create New Service</button><br>]]);
+			local services = Services:select("WHERE ServiceOwner = ?", user.VendorID, {fields = "ServiceID"});
+			h3("My Services");
+			div({class = "services-display horizontal-list"}, function()
+				for i, v in pairs(services) do
+					li(function() widget(require("widgets.serviceBox")({ServiceID = v.ServiceID})) end)
+				end
+			end)
 		end
 	end
 end

@@ -34,11 +34,11 @@ var ServiceID = <%= GET.ServiceID %>;
 			element("input", {["type"] = newFieldValue, id=name, ["name"] = name, required = true, class="form-control", value = service[name], step="any"});
 		end)
 	end
-	%>
+	%> 
 	<div class = "mb-3">
 		<%element("label", {["for"] = "serviceTypeSelect"}, "Service type");%>
 		<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control" <%=GET.ServiceID and "disabled" or "" %>>
-			<%
+			<% --Service type options
 				if not GET.ServiceID then
 					for q = 1, #servicesHelper.types do
 					--TODO format this string like autoInsurance -> Auto Insurance

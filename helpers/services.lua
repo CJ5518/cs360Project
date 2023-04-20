@@ -21,6 +21,14 @@ module.fields = {
     {"Field9", "string"}
 }
 
+--Array of price units
+--Read as 1 dollar per ____
+module.priceUnits = {
+	"month",
+	"mbps",
+	"kwh"
+}
+
 module.types = {
 	"internet", -- tab[1] == "internet";
 	"cellphoneService",
