@@ -4,7 +4,7 @@
 
 
 <% render("widgets.nav") %>
-<h1>Service Calculator</h1>
+<h1 id="service-calc-header">Service Calculator</h1>
 
 <div>
     <form id="service-select">
@@ -25,7 +25,7 @@
 
 <div>
     <form id="internet-form" class="service-calc-form">
-        <label for="devices">Number of Devices: </label>
+        <label for="devices">How many internet reliant devices are in your home?: </label>
         <input name="devices" type="number" min="0">
 
         <label for="games">Do you play online videogames?: </label>
@@ -39,29 +39,19 @@
             <option name="yes">Yes</option>
             <option name="no">No</option>
         </select>
+
+        <label for="address">What is your address?: </label>
+        <input name="address" type="text">
+
+        <label for="work">Do you frequently work from home?: </label>
+        <select id="work-selector" name="work">
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+        </select>
     </form>
 
     <form id='phone-form' class="service-calc-form">
-        <label for="data">Roaming data: </label>
-        <select id="data-selector" name="data">
-            <option name="<5">Less than 5G</option>
-            <option name="<10">Less than 10G</option>
-            <option name="<20">Less than 20G</option>
-            <option name="<50">Less than 50G</option>
-            <option name="unlimited">Unlimited</option>
-        </select>
-
-        <label for="talk/text">Talk/Text: </label>
-        <select id="talk/text-selector" name="talk/text">
-            <option name="unlimited">Unlimited</option>
-            <option name="limited">Limited</option>
-        </select>
-
-        <label for="covergae">Coverage: </label>
-        <select id="coverage-selector" name="coverage">
-            <option name="nationwide">Nationwide (USA)</option>
-            <option name="global">Global</option>
-        </select>
+       
     </form>
 
     <form id="lawn-form" class="service-calc-form">
@@ -99,21 +89,87 @@
         </select>
     </form>
 
-    <form id="mortgage-form">
-        <label for="sq-feet">How big is your house? (square feet): </label>
-        <input name="sq-feet" type="number" min="0">
+    <form id="mortgage-form" class="service-calc-form">
+        <label for="price">How much did you buy your home for?: </label>
+        <input name="price" type="number" min="0">
 
-        <label for="pay">How much did you pay for your house?: </label>
-        <input name="pay" type="number" min="0">
+        <label for="down">How much did you put down?: </label>
+        <input name="down" type="number" min="0">
 
-        <label for="month">How much can you afford to pay per month?: </label>
-        <input name="month" type="number" min="0">
+        <label for="credit">What is your credit score?: </label>
+        <input name="credit" type="number" min="0">
+
+        <label for="term">What is your desired term length?: </label>
+        <select id="term-selector" name="term">
+            <option name="10">10 Years</option>
+            <option name="15">15 Years</option>
+            <option name="20">20 Years</option>
+            <option name="30">30 Years</option>
+        </select>
     </form>
 
-    <form id="HO-insurance-form">
+    <form id="HO-insurance-form" class="service-calc-form">
+        <label for="prop-type">What is your desired term length?: </label>
+        <select id="prop-type-selector" name="prop-type">
+            <option name="single-fam">Single Family</option>
+            <option name="apt-condo">Apartment/Condo</option>
+            <option name="mobile">Mobile Home</option>
+            <option name="other">Other</option>
+        </select>
+
+        <label for="own-rent">Do you own or rent your home?: </label>
+        <select id="own-rent-selector" name="own-rent">
+            <option name="own">Own</option>
+            <option name="rent">Rent</option>
+        </select>
+
+        <label for="age">How old is your home?: </label>
+        <select id="age-selector" name="age">
+            <option name="new">New</option>
+            <option name="1-10">1-10 Years</option>
+            <option name="11-20">11-20 Years</option>
+            <option name="21-50">21-50 Years</option>
+            <option name="50+">Over 50 years</option>
+        </select>
+
+        <label for="sq-feet-home">How big is your home? (square feet): </label>
+        <input name="sq-feet-home" type="number" min="0">
+
+        <label for="stories">How many stories is your home?: </label>
+        <select id="stories-selector" name="stories">
+            <option name="1">1 Story</option>
+            <option name="2+">2 or more stories</option>
+        </select>
+
+        <label for="credit">What is your credit score?: </label>
+        <input name="credit" type="number" min="0">
     </form>
 
-    <form id="auto-insurance-form">
+    <form id="auto-insurance-form" class="service-calc-form">
+        <label for="year">When was your vehicle made?: </label>
+        <input name="year" type="number" min="0">
+
+        <label for="make">What is your vehicle make?: </label>
+        <input name="make" type="text">
+
+        <label for="model">What is your vehicle model?: </label>
+        <input name="model" type="text">
+
+        <label for="license">Do you have a valid driver's license?: </label>
+        <select id="license-selector" name="license">
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+        </select>
+
+        <label for="sr22">Do you need an SR-22?: </label>
+        <select id="sr22-selector" name="sr22">
+            <option name="yes">Yes</option>
+            <option name="no">No</option>
+        </select>
+
+        <label for="credit">What is your credit score?: </label>
+        <input name="credit" type="number" min="0">
+
     </form>
     
     <input id="calculate" type="button" value="Calculate">
@@ -278,6 +334,14 @@ calculate.addEventListener('click', () => {
         result.style.display = 'block';    // SHOW the result
     }
 });
+
+// downpayment 
+// purchase price - downpayment = loan
+// interest rate or credit score
+// term (length of time 10, 15, 20, 30)
+// 
+// vendors would be banks
+// loan fees (3-10k)
 
 </script>
 
