@@ -4,6 +4,7 @@ $("#submitButton").click(function() {
 		str = "&NewService=false&ServiceID=" + ServiceID;
 	}
 	console.log($('#editServiceInfoForm').serialize() + str);
+	console.log($('#editServiceInfoForm')[0].reportValidity());
 	return;
 	$.ajax({
 		type : 'POST',
@@ -16,7 +17,32 @@ $("#submitButton").click(function() {
 	window.location.href = "/";
 })
 
+var theActiveSection = null;
+
+function onServiceTypeChange() {
+	console.log($( "#serviceTypeSelect" ).val());
+
+	if (theActiveSection == null) {
+		theActiveSection = $("#serviceFieldDiv" + $( "#serviceTypeSelect" ).val());
+	} else {
+		theActiveSection.attr("style", "display: none;");
+		theActiveSection.children().each(function() {
+			$(this).attr("disabled", true);
+		})
+	}
+	
+	
+	theActiveSection = $("#serviceFieldDiv" + $( "#serviceTypeSelect" ).val());
+	theActiveSection.attr("style", "display: inline;");
+	theActiveSection.children().each(function() {
+		$(this).attr("disabled", false);
+	})
+}
 
 $( "#serviceTypeSelect" ).change(function() {
-	console.log($( "#serviceTypeSelect" ).val());
+	onServiceTypeChange();
 });
+
+$( document ).ready(function(){
+	onServiceTypeChange();
+})

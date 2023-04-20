@@ -50,6 +50,47 @@ var ServiceID = <%= GET.ServiceID %>;
 	--TODO
 	--Add the other elements to this form, Field1, Field2, etc.
 	--style="display: none;" and the 'disabled' attribute to have things in a form but not visible or get sent to the server
+	for q = 1, #servicesHelper.types do
+		element("div", {style = "display: none;", id = "serviceFieldDiv" .. tostring(q)}, function()
+		local fieldsTable = servicesHelper.typeFields[servicesHelper.types[q]];
+			for fid = 1, #fieldsTable do
+				local field = fieldsTable[fid];
+				local name = field[1];
+				local datatype = field[2];
+				element("text", tostring(name));
+				local patternString;
+				local helpText;
+				--If there are string options
+				if field[3] then
+					if datatype == "mixed" then
+						patternString = "\\d";
+						helpText = "Either numbers or ";
+					else
+						patternString = "";
+						helpText = "The values ";
+					end
+					--Set this to string to make creating the input elements easier
+					datatype = "mixed";
+					for fieldElem = 3, #field do
+						if patternString == "" then
+							patternString = patternString .. field[fieldElem];
+						else 
+							patternString = patternString .. "|" .. field[fieldElem];
+						end
+						helpText = helpText .. "\"" .. field[fieldElem] .. "\"";
+					end
+					helpText = helpText .. " are accepted";
+				end
+				element("input", {
+					class = "form-control", pattern = patternString, type = datatype == "int" and "number" or "text",
+					id="Field" .. tostring(fid), name="Field" .. tostring(fid), disabled = true
+				});
+				if helpText then
+					element("div", {class = "form-text"}, helpText);
+				end
+			end
+		end)
+	end
 	%>
 </form>
 

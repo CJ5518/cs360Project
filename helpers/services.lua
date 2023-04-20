@@ -39,6 +39,14 @@ function module.getIDFromType(str)
 	end
 end
 
+function module.getTypeFromID(id)
+	if type(id) ~= "number" then
+		error("Something other than number passed as id (getTypeFromID)");
+	else
+		return module.types[id];
+	end
+end
+
 --The special fields for all the types
 module.typeFields = {
 	["internet"] = { --Internet
