@@ -63,7 +63,7 @@ var ServiceID = <%= GET.ServiceID %>;
 				--If there are string options
 				if field[3] then
 					if datatype == "mixed" then
-						patternString = "\\d";
+						patternString = "\\d+";
 						helpText = "Either numbers or ";
 					else
 						patternString = "";

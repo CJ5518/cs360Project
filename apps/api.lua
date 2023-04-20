@@ -6,6 +6,8 @@ local send_email = require("helpers.email").send_email;
 local Users = require("models.Users");
 local Vendors = require("models.Vendors");
 local Homes = require("models.Homes");
+local Services = require("models.Services");
+local servicesHelper = require("helpers.services");
 local homesHelper = require("helpers.homes");
 local accounts = require("helpers.accounts");
 local getRandomString = require("helpers.randomString").getRandomString;
@@ -201,7 +203,44 @@ end)
 
 --Create or edit a service, see docs for homes
 app:post("services", "/services", function(self)
+	local data = self.POST;
+	data.ServiceID = tonumber(data.ServiceID)
 
+	--Only vendors get to deal with services
+	if not (accounts.getAccountType(self) == "Vendor") then
+		return {status = 401};
+	end
+	local service;
+	if data.ServiceID then
+		service = Services:find(data.ServiceID);
+	end
+	--Editing home but couldn't find the given id
+	if not service and data.NewService == "false" then
+		return {status = 404};
+	end
+
+	--Get the data from post into something concrete that we know is good
+	local updateTable = {};
+	for q = 1, #servicesHelper.fieldsWithoutIDsOrGenerics do
+		local name, type = servicesHelper.fieldsWithoutIDsOrGenerics[q][1], servicesHelper.fieldsWithoutIDsOrGenerics[q][2];
+		local newFieldValue = data[name];
+		if tonumber(newFieldValue) then
+			newFieldValue = tonumber(data[name]);
+		else
+			--It probably already is a string but whatever
+			newFieldValue = tostring(data[name]);
+		end
+		updateTable[name] = newFieldValue;
+	end
+	--If just updating
+	print("BEFORE IF")
+	if data.NewService == "false" then
+		print("HERE");
+		service:update(updateTable);
+	else --Making new home
+		updateTable["ServiceOwner"] = self.account.VendorID; --We make sure we are logged in as user beforehand
+		Services:create(updateTable);
+	end
 end)
 
 --Delete a service

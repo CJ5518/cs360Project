@@ -3,18 +3,19 @@ $("#submitButton").click(function() {
 	if (ServiceID) {
 		str = "&NewService=false&ServiceID=" + ServiceID;
 	}
-	console.log($('#editServiceInfoForm').serialize() + str);
-	console.log($('#editServiceInfoForm')[0].reportValidity());
-	return;
-	$.ajax({
-		type : 'POST',
-		url : '/services',
-		data : $('#editServiceInfoForm').serialize() + str,
-		error: function(xhr, status, error) {
-			console.log(xhr.responseText);
-		  }
-	})
-	window.location.href = "/";
+	
+	//If the form is valid
+	if ($('#editServiceInfoForm')[0].reportValidity()) {
+		$.ajax({
+			type : 'POST',
+			url : '/services',
+			data : $('#editServiceInfoForm').serialize() + str,
+			error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			  }
+		})
+		//window.location.href = "/";
+	}
 })
 
 var theActiveSection = null;
