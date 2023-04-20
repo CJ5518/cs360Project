@@ -95,19 +95,3 @@ a.unstyled {
 	background-color: #066e73;
 	color: rgb(255, 255, 255);
 }
-
-.service-calc-form {
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#cont {
-	position:absolute;
-	top: 155px;
-	left: 350px;
-}
-
-#service-calc-header, #afford-calc-header {
-	padding-top: 15px;
-	padding-bottom: 15px;
-}
