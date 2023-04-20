@@ -219,7 +219,7 @@ app:post("services", "/services", function(self)
 		return {status = 404};
 	end
 
-	--Get the data from post into something concrete that we know is good
+	--Get the data from post into the update table
 	local updateTable = {};
 	for q = 1, #servicesHelper.fieldsWithoutIDsOrGenerics do
 		local name, type = servicesHelper.fieldsWithoutIDsOrGenerics[q][1], servicesHelper.fieldsWithoutIDsOrGenerics[q][2];
@@ -232,10 +232,19 @@ app:post("services", "/services", function(self)
 		end
 		updateTable[name] = newFieldValue;
 	end
+	--Things not covered by the above
+	updateTable["ServiceTypeID"] = data.serviceTypeSelect;
+	updateTable["PriceUnitID"] = data.PriceUnitID;
+
+	--Add the fields
+	for q = 1, 9 do
+		if data["Field" .. tostring(q)] then
+			updateTable["Field" .. tostring(q)] = data["Field" .. tostring(q)];
+		end
+	end
+
 	--If just updating
-	print("BEFORE IF")
 	if data.NewService == "false" then
-		print("HERE");
 		service:update(updateTable);
 	else --Making new home
 		updateTable["ServiceOwner"] = self.account.VendorID; --We make sure we are logged in as user beforehand

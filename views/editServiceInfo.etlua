@@ -31,25 +31,28 @@ var ServiceID = <%= GET.ServiceID %>;
 		end
 		element("div", {class = "mb-3"}, function()
 			element("label", {["for"] = name}, name);
-			element("input", {["type"] = newFieldValue, id=name, ["name"] = name, required = true, class="form-control", value = service[name]});
+			element("input", {["type"] = newFieldValue, id=name, ["name"] = name, required = true, class="form-control", value = service[name], step="any"});
 		end)
 	end
 	%>
 	<div class = "mb-3">
 		<%element("label", {["for"] = "serviceTypeSelect"}, "Service type");%>
-		<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control">
+		<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control" <%=GET.ServiceID and "disabled" or "" %>>
 			<%
-				for q = 1, #servicesHelper.types do
-				--TODO format this string like autoInsurance -> Auto Insurance
+				if not GET.ServiceID then
+					for q = 1, #servicesHelper.types do
+					--TODO format this string like autoInsurance -> Auto Insurance
+						element("option", {value=tostring(q)}, servicesHelper.types[q]);
+					end
+				else
+					local q = service.ServiceTypeID;
 					element("option", {value=tostring(q)}, servicesHelper.types[q]);
 				end
 			%>
 		</select>
 	</div>
 	<%
-	--TODO
-	--Add the other elements to this form, Field1, Field2, etc.
-	--style="display: none;" and the 'disabled' attribute to have things in a form but not visible or get sent to the server
+	--The special Fields[1-9]s of the service
 	for q = 1, #servicesHelper.types do
 		element("div", {style = "display: none;", id = "serviceFieldDiv" .. tostring(q)}, function()
 		local fieldsTable = servicesHelper.typeFields[servicesHelper.types[q]];
@@ -63,8 +66,8 @@ var ServiceID = <%= GET.ServiceID %>;
 				--If there are string options
 				if field[3] then
 					if datatype == "mixed" then
-						patternString = "\\d+";
-						helpText = "Either numbers or ";
+						patternString = "\\d+"; --TODO (not only ints)
+						helpText = "Either (integer) numbers or ";
 					else
 						patternString = "";
 						helpText = "The values ";
@@ -81,9 +84,13 @@ var ServiceID = <%= GET.ServiceID %>;
 					end
 					helpText = helpText .. " are accepted";
 				end
+				local val;
+				if q == service.ServiceTypeID then
+					val = service["Field" .. tostring(fid)];
+				end
 				element("input", {
 					class = "form-control", pattern = patternString, type = datatype == "int" and "number" or "text",
-					id="Field" .. tostring(fid), name="Field" .. tostring(fid), disabled = true
+					id="Field" .. tostring(fid), name="Field" .. tostring(fid), disabled = true, value = val, required = true
 				});
 				if helpText then
 					element("div", {class = "form-text"}, helpText);
