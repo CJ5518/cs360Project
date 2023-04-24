@@ -53,6 +53,7 @@ a.unstyled {
 .service-box {
 	border:1px solid black;
 	width: 100px;
+	cursor: pointer;
 }
 
 /* home box widget */

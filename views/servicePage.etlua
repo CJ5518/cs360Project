@@ -1,5 +1,8 @@
 <% render("widgets.nav") %>
+<%
+local Services = require("models.Services");
 
+%>
 
 <h1>Service Details - <%=service_id %></h1>
 <p>Service Description</p>

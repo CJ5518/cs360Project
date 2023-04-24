@@ -15,7 +15,7 @@ $("#submitButton").click(function() {
 			  }
 		})
 		console.log($('#editServiceInfoForm').serialize() + str);
-		//window.location.href = "/";
+		window.location.href = "/";
 	}
 })
 
