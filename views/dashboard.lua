@@ -56,6 +56,8 @@ function Dashboard_mt:content()
 		--How many comparisons have we already done on this variable?
 		--No matter, different dashboards for each
 		if userType == "User" then --USER
+			--The edit info button
+			raw([[<br><button onclick="window.location.href = '/editUserInfo';">Edit User Info</button><br>]]);
 			--Add the create new home button
 			raw([[<br><button onclick="window.location.href = '/editHomeInfo';">Create New Home</button><br>]]);
 			local homes = Homes:select("WHERE HomeOwner = ?", user.UserID, {fields = "HomeID"});
@@ -67,6 +69,8 @@ function Dashboard_mt:content()
 			end)
 		else
 			--VENDOR dashboard
+			--The edit info button
+			raw([[<br><button onclick="window.location.href = '/editVendorInfo';">Edit Vendor Info</button><br>]]);
 			--The create new service button
 			raw([[<br><button onclick="window.location.href = '/editServiceInfo';">Create New Service</button><br>]]);
 			local services = Services:select("WHERE ServiceOwner = ?", user.VendorID, {fields = "ServiceID"});

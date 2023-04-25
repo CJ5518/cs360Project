@@ -8,10 +8,12 @@
 
 - [X] Homes
     - [ ] Add families
-- [ ] Service (also file uploads) (Carson)
+- [ ] Services (Carson)
     - [ ] Service price units
-    - [ ] Service viewing on the dashboard
-    - [ ] Service box improvements
+    - [X] Service viewing on the dashboard
+    - [X] Service box improvements
     - [ ] Service page improvements
-- [ ] Service page pull from db
+- [ ] Purchase functionality
+
+- [X] Service page pull from db
 - [ ] Fix forgot password (Carson)

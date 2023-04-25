@@ -25,6 +25,17 @@ app:get("editUserInfo", "/editUserInfo", function(self)
 	end)
 end)
 
+app:get("editVendorInfo", "/editVendorInfo", function(self)
+	return self:html(function()
+		local editVendorInfoFormWidget = require("widgets.editVendorInfoForm");
+		widget(editVendorInfoFormWidget({
+			onlyForm = false,
+			editPassword = true,
+			session = self.session
+		}));
+	end)
+end)
+
 --------------------------------------------------
 -- Routes that go to pages --
 --------------------------------------------------
@@ -53,6 +64,12 @@ end)
 app:match("/service/:service_id", function(self)
 	self.service_id = self.params.service_id;
 	return {render = "servicePage"}
+end)
+
+--Service page
+app:match("/vendor/:vendor_id", function(self)
+	self.vendor_id = self.params.vendor_id;
+	return {render = "vendorPage"}
 end)
 
 

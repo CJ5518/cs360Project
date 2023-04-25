@@ -9,7 +9,7 @@ local owner = Vendors:find(service.ServiceOwner)
 
 <h1><%=service.Name %></h1>
 <p><%=service.Description %></p>
-<p>Owner: <%=owner.CompanyName%></p>
+<a href="/vendor/<%=service.ServiceOwner%>" >Owner: <%=owner.CompanyName%></a>
 <%
 for q = 1, #service:getTypeFields() do
 	local elem = service:getTypeFields()[q];

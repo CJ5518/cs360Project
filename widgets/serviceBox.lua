@@ -16,11 +16,11 @@ function servBox_mt:content()
 				--button({class = "service-box-button", onclick="homeBoxDeleteButtonFunc(" .. tostring(self.HomeID) .. ")"}, "Delete home");
 				--button({class = "service-box-button", onclick="homeBoxEditButtonFunc(" .. tostring(self.HomeID) .. ")"}, "Edit home");
 				li(function() 
-					span({class = "service-box-title", onclick="location.href='service/" .. tostring(self.ServiceID) .. "'"}, service.Name)
+					span({class = "service-box-title service-box-item", onclick="location.href='service/" .. tostring(self.ServiceID) .. "'"}, service.Name)
 				end)
 				local function field(str)
 					li(function ()
-						span({class = "service-box-item"}, str);
+						span({class = "service-box-item", onclick="location.href='service/" .. tostring(self.ServiceID) .. "'"}, str);
 					end)
 				end
 				for q = 1, #servicesHelper.typeFields[servicesHelper.types[service.ServiceTypeID]] do

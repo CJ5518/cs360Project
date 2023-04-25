@@ -22,6 +22,7 @@ function editVendorInfoForm_mt:content()
 			--inputTextEasy("Password", "Password (Not implemented yet sorry)", false, "", "password", self.editPassword);
 			inputTextEasy("CompanyName", "Company Name", true, user.CompanyName);
 			inputTextEasy("PhoneNumber", "Phone Number", false, user.PhoneNumber);
+			inputTextEasy("Description", "Description", false, user.Description);
 		
 			button({type="submit", class="btn btn-primary"}, "Submit");
 		end)
@@ -29,7 +30,7 @@ function editVendorInfoForm_mt:content()
 	if self.onlyForm then
 		doForm();
 	else
-		h2("Edit User Info For: " .. user.FirstName);
+		h2("Edit User Info For: " .. user.CompanyName);
 		doForm();
 	end
 end

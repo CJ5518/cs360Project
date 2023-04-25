@@ -1,0 +1,24 @@
+<% render("widgets.nav") %>
+<%
+local Services = require("models.Services");
+local Vendors = require("models.Vendors");
+local servicesHelper = require("helpers.services");
+local vendor = Vendors:find(vendor_id);
+%>
+
+<h1><%=vendor.CompanyName %></h1>
+<p><%=vendor.Description %></p>
+<p>Contact info: <br><%=vendor.PhoneNumber%><br><%=vendor.Email%></p>
+<h2>Our Services:</h2>
+<%
+
+local services = Services:select("where ServiceOwner = ?", vendor.VendorID)
+--List the vendors offered services
+element("div", {class = "services-display horizontal-list"}, function()
+	for i, v in pairs(services) do
+		li(function() widget(require("widgets.serviceBox")({ServiceID = v.ServiceID})) end)
+	end
+end)
+
+
+%>

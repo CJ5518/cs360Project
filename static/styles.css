@@ -50,9 +50,16 @@ a.unstyled {
 	padding: 10px;
 }
 
+.service-box-list li {
+	display: block !important;
+}
+
 .service-box {
 	border:1px solid black;
-	width: 100px;
+	width: 200;
+}
+
+.service-box-item {
 	cursor: pointer;
 }
 
