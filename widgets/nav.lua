@@ -11,6 +11,7 @@ local links = {
 function nav_mt:content()
 	if self.account then
 		table.insert(links, 2, {"Dashboard", "dashboard"});
+		table.remove(links,1);
 	end
 	
 	div({class = "navigation"}, function() 
@@ -19,7 +20,7 @@ function nav_mt:content()
 				for q = 1, #links do
 					li(function()
 						--Unreadable hunk of junk don't worry about it
-						--Sets class to active if this 
+						--Sets class to active if this
 						local classMaybe = self.route_name and (self.route_name:find(links[q][2]) and 'active' or '') or '';
 						a({href="/" .. (links[q][2]), class = classMaybe}, links[q][1]);
 					end)
