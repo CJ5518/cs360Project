@@ -1,15 +1,22 @@
 <% render("widgets.nav") %>
 <%
 local Services = require("models.Services");
+local Vendors = require("models.Vendors");
+local servicesHelper = require("helpers.services");
+local service = Services:find(service_id);
+local owner = Vendors:find(service.ServiceOwner)
+%>
+
+<h1><%=service.Name %></h1>
+<p><%=service.Description %></p>
+<p>Owner: <%=owner.CompanyName%></p>
+<%
+for q = 1, #service:getTypeFields() do
+	local elem = service:getTypeFields()[q];
+	element("p", elem[1] .. ": " .. service:getField(q));
+end
 
 %>
 
-<h1>Service Details - <%=service_id %></h1>
-<p>Service Description</p>
-<p>Company Name</p>
-<p>Cost and other details</p>
-<p>Owner information:<br>Name, contact information</p>
-<p>Contract:</p>
-This contract is: firm, non-flimsy, no flim-flam. If the stuff in this contract<br>
-isn't, uhh, fulfilled by you, the one signing it, then, woof,<br>
-hoo boy. Big trouble, legally speaking.
+<button>Purchase</button>
+
