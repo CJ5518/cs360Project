@@ -25,6 +25,17 @@ app:get("editUserInfo", "/editUserInfo", function(self)
 	end)
 end)
 
+app:get("editVendorInfo", "/editVendorInfo", function(self)
+	return self:html(function()
+		local editVendorInfoFormWidget = require("widgets.editVendorInfoForm");
+		widget(editVendorInfoFormWidget({
+			onlyForm = false,
+			editPassword = true,
+			session = self.session
+		}));
+	end)
+end)
+
 --------------------------------------------------
 -- Routes that go to pages --
 --------------------------------------------------
@@ -55,16 +66,65 @@ app:match("/service/:service_id", function(self)
 	return {render = "servicePage"}
 end)
 
+--Service page
+app:match("/vendor/:vendor_id", function(self)
+	self.vendor_id = self.params.vendor_id;
+	return {render = "vendorPage"}
+end)
+
+
+--Things on the navbar
 
 app:get("serviceCalc", "/serviceCalc", function(self)
-	return {render = "serviceCalc"};
+	if self.account then
+		return {render = "serviceCalc"};
+	else
+		return self:html(function()
+			widget(require("widgets.nav")({route_name = self.route_name}))
+			h1(function()
+				text("Please ")
+				a({href = "/login"}, "log in")
+				text(" or ")
+				a({href = "/signup"}, "sign up")
+				text(" to use the service calculator")
+			end)
+		end)
+	end
 end)
 app:get("affordCalc", "/affordCalc", function(self)
-	return {render = "affordCalc"};
+	if self.account then
+		return {render = "affordCalc"};
+	else
+		return self:html(function()
+			widget(require("widgets.nav")({route_name = self.route_name}))
+			h1(function()
+				text("Please ")
+				a({href = "/login"}, "log in")
+				text(" or ")
+				a({href = "/signup"}, "sign up")
+				text(" to use the affordability calculator")
+			end)
+		end)
+	end
 end)
 app:get("serviceSearch", "/serviceSearch", function(self)
-	return {render = "serviceSearch"};
+	if self.account then
+		return {render = "serviceSearch"};
+	else
+		return self:html(function()
+			widget(require("widgets.nav")({route_name = self.route_name}))
+			h1(function()
+				text("Please ")
+				a({href = "/login"}, "log in")
+				text(" or ")
+				a({href = "/signup"}, "sign up")
+				text(" to use the service search")
+			end)
+		end)
+	end
 end)
+
+--Other
 app:get("editHomeInfo", "/editHomeInfo", function(self)
 	return {render = "editHomeInfo"};
 end)

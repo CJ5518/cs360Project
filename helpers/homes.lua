@@ -14,7 +14,10 @@ module.fields = {
     {"HalfBaths", "int"}, -- int,
     {"SquareFootage", "int"}, -- int,
     {"CarpetSquareFootage", "int"}, -- int,
-    {"ConstructionYear", "int"} -- int,
+    {"ConstructionYear", "int"}, -- int,
+    {"Adults", "int"}, -- int,
+    {"Children", "int"}, -- int,
+    {"Seniors", "int"} -- int,
 }
 
 --Version of the above without q=1 or q=2, which are the two ids

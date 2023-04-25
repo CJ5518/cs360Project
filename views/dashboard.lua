@@ -2,6 +2,7 @@ local Widget = require("lapis.html").Widget
 
 local Dashboard, Dashboard_mt = Widget:extend("Dashboard")
 local Homes = require("models.Homes");
+local Services = require("models.Services");
 local accounts = require("helpers.accounts");
 local util = require("lapis.util")
 
@@ -49,15 +50,18 @@ function Dashboard_mt:content()
 			text "Welcome to my site!"
 		end)
 		raw('<script src="/static/js/homeBoxScript.js"></script>');
+		raw('<script src="/static/js/serviceBoxScript.js"></script>');
 		widget(require("widgets.logoutButton"));
 
 		--How many comparisons have we already done on this variable?
 		--No matter, different dashboards for each
 		if userType == "User" then --USER
+			--The edit info button
+			raw([[<br><button onclick="window.location.href = '/editUserInfo';">Edit User Info</button><br>]]);
 			--Add the create new home button
 			raw([[<br><button onclick="window.location.href = '/editHomeInfo';">Create New Home</button><br>]]);
 			local homes = Homes:select("WHERE HomeOwner = ?", user.UserID, {fields = "HomeID"});
-			h3("My homes");
+			h3("My Homes");
 			div({class = "homes-display horizontal-list"}, function()
 				for i, v in pairs(homes) do
 					li(function() widget(require("widgets.homeBox")({HomeID = v.HomeID})) end)
@@ -65,8 +69,17 @@ function Dashboard_mt:content()
 			end)
 		else
 			--VENDOR dashboard
-			--TODO
+			--The edit info button
+			raw([[<br><button onclick="window.location.href = '/editVendorInfo';">Edit Vendor Info</button><br>]]);
+			--The create new service button
 			raw([[<br><button onclick="window.location.href = '/editServiceInfo';">Create New Service</button><br>]]);
+			local services = Services:select("WHERE ServiceOwner = ?", user.VendorID, {fields = "ServiceID"});
+			h3("My Services");
+			div({class = "services-display horizontal-list"}, function()
+				for i, v in pairs(services) do
+					li(function() widget(require("widgets.serviceBox")({ServiceID = v.ServiceID})) end)
+				end
+			end)
 		end
 	end
 end
