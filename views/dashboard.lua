@@ -50,6 +50,7 @@ function Dashboard_mt:content()
 			text "Welcome to my site!"
 		end)
 		raw('<script src="/static/js/homeBoxScript.js"></script>');
+		raw('<script src="/static/js/serviceBoxScript.js"></script>');
 		widget(require("widgets.logoutButton"));
 
 		--How many comparisons have we already done on this variable?

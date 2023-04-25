@@ -47,3 +47,6 @@ element("li", function() widget(widgetThing); end)
 
 %>
 </ul>
+
+
+<script src="static/js/serviceBoxScript.js"></script>

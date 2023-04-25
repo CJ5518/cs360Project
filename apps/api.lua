@@ -254,7 +254,8 @@ end)
 
 --Delete a service
 app:delete("services", "/services", function(self)
-	
+	local service = Services:find(tonumber(self.POST.ServiceID));
+	service:delete();
 end)
 
 return app;
