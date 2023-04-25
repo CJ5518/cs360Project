@@ -20,6 +20,9 @@ CREATE TABLE Homes (
     SquareFootage int,
     CarpetSquareFootage int,
     ConstructionYear int,
+    Adults int,
+    Children int,
+    Seniors int,
     FOREIGN KEY(HomeOwner) REFERENCES Users(UserID)
 );
 CREATE TABLE Vendors (

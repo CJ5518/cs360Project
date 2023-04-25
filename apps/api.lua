@@ -130,7 +130,6 @@ end)
 
 
 --Update vendor info
---Very broken try not to use
 app:post("updateVendorInfoAction", "/updateVendorInfoAction", function(self)
 	if self.account and accounts.getAccountType(self) == "Vendor" then
 		self.account.CompanyName = self.POST.CompanyName == "" and self.account.CompanyName or self.POST.CompanyName;

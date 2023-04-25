@@ -73,6 +73,8 @@ app:match("/vendor/:vendor_id", function(self)
 end)
 
 
+--Things on the navbar
+
 app:get("serviceCalc", "/serviceCalc", function(self)
 	if self.account then
 		return {render = "serviceCalc"};
@@ -121,6 +123,8 @@ app:get("serviceSearch", "/serviceSearch", function(self)
 		end)
 	end
 end)
+
+--Other
 app:get("editHomeInfo", "/editHomeInfo", function(self)
 	return {render = "editHomeInfo"};
 end)
