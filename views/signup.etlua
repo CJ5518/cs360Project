@@ -15,3 +15,6 @@
 	Confirm Password: <input type="password" id="confirmPassword" name="confirmPassword" required><br>
 	<input type="submit" value="Create Account">
 </form>
+
+<p style='display: inline;'>Already Have an Account?</p>
+<a href='login'>Login</a>

@@ -19,6 +19,6 @@
 - [X] Service page pull from db
 - [ ] Fix forgot password (Carson)
 
-- [ ] navigate from signup to login
+- [X] navigate from signup to login
 - [ ] better error message for making an account with the same email as an existing account
 - [ ] check data types of user/vendor info before inserting into db

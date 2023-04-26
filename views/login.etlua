@@ -15,3 +15,6 @@
 <script src="/static/js/loginPage.js"></script>
 <button onclick="tryLogin()">Log in</button>
 <button onclick="requestPasswordReset()">Reset Password</button>
+
+<p style='display: inline;'>Don't Have an Account?</p>
+<a href='signup'>Signup</a>
