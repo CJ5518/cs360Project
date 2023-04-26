@@ -18,9 +18,13 @@ function servBox_mt:content()
 				li(function() 
 					span({class = "service-box-title service-box-item", onclick="location.href='service/" .. tostring(self.ServiceID) .. "'"}, service.Name)
 				end)
-				local function field(str)
+				local function field(str, noClick)
 					li(function ()
-						span({class = "service-box-item", onclick="location.href='service/" .. tostring(self.ServiceID) .. "'"}, str);
+						local onclick="location.href='service/" .. tostring(self.ServiceID) .. "'";
+						if noClick then
+							onclick = false;
+						end
+						span({class = "service-box-item", ["onclick"] = onclick}, str);
 					end)
 				end
 				for q = 1, #servicesHelper.typeFields[servicesHelper.types[service.ServiceTypeID]] do
@@ -31,7 +35,7 @@ function servBox_mt:content()
 					field(function() 
 						button({class = "service-box-button", onclick="serviceBoxDeleteButtonFunc(" .. tostring(self.ServiceID) .. ")"}, "Delete service");
 						button({class = "service-box-button", onclick="serviceBoxEditButtonFunc(" .. tostring(self.ServiceID) .. ")"}, "Edit service");
-					end)
+					end, true)
 				end
 			end
 		end)

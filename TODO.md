@@ -9,7 +9,7 @@
 - [X] Homes
     - [ ] Add families
 - [ ] Services (Carson)
-    - [ ] Service price units
+    - [X] Service price units
     - [X] Service viewing on the dashboard
     - [X] Service box improvements
     - [ ] Service page improvements

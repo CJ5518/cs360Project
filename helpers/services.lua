@@ -22,11 +22,14 @@ module.fields = {
 }
 
 --Array of price units
---Read as 1 dollar per ____
+--Read as 1 dollar ____
 module.priceUnits = {
-	"month",
-	"mbps",
-	"kwh"
+	"monthly",
+	"yearly",
+	"per mb",
+	"per kwh",
+	"per square foot",
+	"per service"
 }
 
 module.types = {

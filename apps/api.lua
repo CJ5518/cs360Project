@@ -233,7 +233,7 @@ app:post("services", "/services", function(self)
 	end
 	--Things not covered by the above
 	updateTable["ServiceTypeID"] = data.serviceTypeSelect;
-	updateTable["PriceUnitID"] = data.PriceUnitID;
+	updateTable["PriceUnitID"] = data.priceUnitSelect;
 
 	--Add the fields
 	for q = 1, 9 do
