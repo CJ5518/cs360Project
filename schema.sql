@@ -52,4 +52,15 @@ CREATE TABLE Services (
     Field8 varchar(255),
     Field9 varchar(255),
     FOREIGN KEY(ServiceOwner) REFERENCES Vendors(VendorID)
-)
+);
+CREATE TABLE Orders (
+    OrderID INTEGER PRIMARY KEY,
+    VendorID INTEGER,
+    UserID INTEGER,
+    ServiceID INTEGER,
+    HomeID INTEGER,
+    FOREIGN KEY(VendorID) REFERENCES Vendors(VendorID),
+    FOREIGN KEY(UserID) REFERENCES Users(UserID),
+    FOREIGN KEY(ServiceID) REFERENCES Services(ServiceID),
+    FOREIGN KEY(HomeID) REFERENCES Homes(HomeID)
+);
