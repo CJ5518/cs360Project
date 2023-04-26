@@ -91,6 +91,22 @@ app:get("serviceCalc", "/serviceCalc", function(self)
 		end)
 	end
 end)
+app:get("ordersPage", "/ordersPage", function(self)
+	if self.account then
+		return {render = "ordersPage"};
+	else
+		return self:html(function()
+			widget(require("widgets.nav")({route_name = self.route_name}))
+			h1(function()
+				text("Please ")
+				a({href = "/login"}, "log in")
+				text(" or ")
+				a({href = "/signup"}, "sign up")
+				text(" to access orders")
+			end)
+		end)
+	end
+end)
 app:get("affordCalc", "/affordCalc", function(self)
 	if self.account then
 		return {render = "affordCalc"};

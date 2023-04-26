@@ -1,0 +1,9 @@
+<% render("widgets.nav") %>
+
+<%
+--widget(require("widgets.serviceBox")({ServiceID = SERVICE_ID}))
+
+%>
+
+<h1>Orders</h1>
+
