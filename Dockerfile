@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
 RUN apt-get -y install make gcc curl libreadline-dev
@@ -21,6 +21,12 @@ RUN apt-get -y install sqlite3 libsqlite3-dev
 RUN luarocks install lsqlite3
 RUN apt-get -y install git
 RUN git clone https://github.com/CJ5518/cs360Project
+RUN chown -R 1001:1001 cs360Project/
+RUN chmod 777 cs360Project/
+RUN ls -lR > cs360Project/static/output.txt
 WORKDIR "cs360Project"
+RUN git config --global --add safe.directory /cs360Project
+RUN git pull
+RUN chmod 777 /cs360Project/dev_database.sqlite
 EXPOSE 8080
 CMD ["lapis", "serve"]
