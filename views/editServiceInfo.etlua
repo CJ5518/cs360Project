@@ -38,7 +38,7 @@ var ServiceID = <%= GET.ServiceID %>;
 	<div class = "mb-3">
 		<%element("label", {["for"] = "priceUnitSelect"}, "Price Unit");%>
 		<select name = "priceUnitSelect" id = "priceUnitSelect" class = "form-control" <%=GET.ServiceID and "disabled" or "" %>>
-			<% --Service type options
+			<% --Service price unit options
 				if not GET.ServiceID then
 					for q = 1, #servicesHelper.priceUnits do
 						element("option", {value=tostring(q)}, servicesHelper.priceUnits[q]);

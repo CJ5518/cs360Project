@@ -1,7 +1,78 @@
-<% local serviceBox = require("widgets.serviceBox"); %>
+<%
+local serviceBox = require("widgets.serviceBox"); 
+local Homes = require("models.Homes");
+local Services = require("models.Services");
+local servicesHelper = require("helpers.services");
+
+--Compatibility, I copied some code from a thing that relies on this empty table
+local service = {};
+%>
 <% render("widgets.nav") %>
 
-<div>I'm looking for a service that is for 
+<div class = "mb-3">
+	<%element("label", {["for"] = "serviceTypeSelect"}, "Service type:");%>
+	<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control" <%=GET.ServiceID and "disabled" or "" %>>
+		<% --Service type options
+			if not GET.ServiceID then
+				for q = 1, #servicesHelper.types do
+				--TODO format this string like autoInsurance -> Auto Insurance
+					element("option", {value=tostring(q)}, servicesHelper.types[q]);
+				end
+			else
+				local q = service.ServiceTypeID;
+				element("option", {value=tostring(q)}, servicesHelper.types[q]);
+			end
+		%>
+	</select>
+</div>
+<%
+--The special Fields[1-9]s of the service
+for q = 1, #servicesHelper.types do
+	element("div", {style = "display: none;", id = "serviceFieldDiv" .. tostring(q)}, function()
+	local fieldsTable = servicesHelper.typeFields[servicesHelper.types[q]];
+		for fid = 1, #fieldsTable do
+			local field = fieldsTable[fid];
+			local name = field[1];
+			local datatype = field[2];
+			element("text", tostring(name));
+			local patternString;
+			local helpText;
+			--If there are string options
+			if field[3] then
+				if datatype == "mixed" then
+					patternString = "\\d+"; --TODO (not only ints)
+					helpText = "Either (integer) numbers or ";
+				else
+					patternString = "";
+					helpText = "The values ";
+				end
+				--Set this to string to make creating the input elements easier
+				datatype = "mixed";
+				for fieldElem = 3, #field do
+					if patternString == "" then
+						patternString = patternString .. field[fieldElem];
+					else 
+						patternString = patternString .. "|" .. field[fieldElem];
+					end
+					helpText = helpText .. "\"" .. field[fieldElem] .. "\"";
+				end
+				helpText = helpText .. " are accepted";
+			end
+			local val;
+			if q == service.ServiceTypeID then
+				val = service["Field" .. tostring(fid)];
+			end
+			element("input", {
+				class = "form-control", pattern = patternString, type = datatype == "int" and "number" or "text",
+				id="Field" .. tostring(fid), name="Field" .. tostring(fid), disabled = true, value = val, required = true
+			});
+			if helpText then
+				element("div", {class = "form-text"}, helpText);
+			end
+		end
+	end)
+end
+%>
 
 <h2>All Services</h2>
 <ul class = "horizontal-list">
