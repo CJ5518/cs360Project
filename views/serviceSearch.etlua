@@ -9,6 +9,8 @@ local service = {};
 %>
 <% render("widgets.nav") %>
 
+<form id="serviceSearchForm">
+
 <div class = "mb-3">
 	<%element("label", {["for"] = "serviceTypeSelect"}, "Service type:");%>
 	<select name = "serviceTypeSelect" id = "serviceTypeSelect" class = "form-control" <%=GET.ServiceID and "disabled" or "" %>>
@@ -63,21 +65,39 @@ for q = 1, #servicesHelper.types do
 				val = service["Field" .. tostring(fid)];
 			end
 			element("input", {
-				class = "form-control", pattern = patternString, type = datatype == "int" and "number" or "text",
-				id="Field" .. tostring(fid), name="Field" .. tostring(fid), disabled = true, value = val, required = true
+				class = "form-control half-width", pattern = patternString, type = datatype == "int" and "number" or "text",
+				id="Field" .. tostring(fid), name="Field" .. tostring(fid), disabled = true, value = val, required = false
 			});
 			if helpText then
 				element("div", {class = "form-text"}, helpText);
 			end
+			--The bits that remind me of the library search Where thing is >/</= to ___
+			element("div", {class="row g-3 align-items-center fieldCompParent"}, function()
+				element("span", {class = "col-auto"}, "I'm looking for services with")
+				element("div", {class = "col-auto"}, function()
+					local nom = "FieldComparison" .. tostring(fid);
+					element("select", {class = "form-select col-auto", id = nom, name=nom, disabled=true}, function()
+						element("option", {value = 1}, ">");
+						element("option", {value = 2}, "<");
+						element("option", {value = 3}, "=");
+					end)
+				end)
+				element("span", {class = "col-auto"}, "the above value")
+			end)
+			element("br")
 		end
 	end)
 end
 %>
 
-<h2>All Services</h2>
+</form>
+
+<button id="submitButton">Search</button>
+
+<h2>Results</h2>
 <ul class = "horizontal-list">
 
-<%%>
+<%   %>
 
 
 <script src="static/js/serviceBoxScript.js"></script>

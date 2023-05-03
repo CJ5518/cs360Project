@@ -103,3 +103,8 @@ a.unstyled {
 	background-color: #066e73;
 	color: rgb(255, 255, 255);
 }
+
+/**/
+.half-width {
+	width: 50% !important;
+}

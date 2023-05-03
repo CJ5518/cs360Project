@@ -257,4 +257,10 @@ app:delete("services", "/services", function(self)
 	service:delete();
 end)
 
+
+--Service search
+app:get("serviceSearchAction", "/serviceSearchAction", function(self)
+	
+end)
+
 return app;
