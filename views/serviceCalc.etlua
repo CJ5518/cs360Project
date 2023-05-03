@@ -25,7 +25,7 @@
 <div>
     <form id="internet-form" class="service-calc-form">
         <label for="devices">How many internet reliant devices are in your home?: </label>
-        <input name="devices" type="number" min="0">
+        <input id="num-devices" name="devices" type="number" min="0">
 
         <label for="games">Do you play online videogames?: </label>
         <select id="games-selector" name="games">
@@ -38,9 +38,6 @@
             <option name="yes">Yes</option>
             <option name="no">No</option>
         </select>
-
-        <label for="address">What is your address?: </label>
-        <input name="address" type="text">
 
         <label for="work">Do you frequently work from home?: </label>
         <select id="work-selector" name="work">
@@ -56,13 +53,11 @@
             <option name="no">No</option>
         </select>
 
-        <label for="data">How much roaming data do you usually use each month?: </label>
+        <label for="data">How often do you use roaming data on your phone?: </label>
         <select id="data-selector" name="data">
-            <option name="1-5">1-5 GB</option>
-            <option name="6-10">6-10 GB</option>
-            <option name="11-20">11-20 GB</option>
-            <option name="21-50">21-50 GB</option>
-            <option name="50+">Over 50 GB</option>
+            <option name="very">Very Often</option>
+            <option name="somewhat">Somewhat Often</option>
+            <option name="rarely">Rarely</option>
         </select>
     </form>
 
@@ -70,34 +65,11 @@
         <label for="sq-feet">How big is your yard? (square feet): </label>
         <input name="sq-feet" type="number" min="0">
 
-        <label for="edging">Do you require edging?: </label>
-        <select id="edging-selector" name="edging">
-            <option name="yes">Yes</option>
-            <option name="no">No</option>
-        </select>
-
-        <label for="trimming">Do you require trimming (trees or bushes)?: </label>
-        <select id="trimming-selector" name="trimming">
-            <option name="yes">Yes</option>
-            <option name="no">No</option>
-        </select>
-
-        <label for="seeding">Do you require seeding?: </label>
-        <select id="seeding-selector" name="seeding">
-            <option name="yes">Yes</option>
-            <option name="no">No</option>
-        </select>
-
-        <label for="fert">Do you require fertilizing?: </label>
-        <select id="fert-selector" name="fert">
-            <option name="yes">Yes</option>
-            <option name="no">No</option>
-        </select>
-
-        <label for="weed">Do you require weeding?: </label>
-        <select id="weed-selector" name="weed">
-            <option name="yes">Yes</option>
-            <option name="no">No</option>
+        <label for="last">When was the last time work was done on your yard?: </label>
+        <select id="last-work-selector" name="last">
+            <option name="<2">Less Than 2 Weeks Ago</option>
+            <option name="2-4">2-4 Weeks Ago</option>
+            <option name=">4">More Than 4 Weeks Ago</option>
         </select>
     </form>
 

@@ -119,9 +119,67 @@ function showForm(serviceType) {
 
 //calculate function
 function calculateService(serviceType) {
-    const resultPara = document.getElementById("result-para");
+    const resultPara = document.getElementById("result-para");   // get result paragraph
+    
+    if (serviceType === "Internet") {
+        // get form values
+        const numDevices = document.getElementById("num-devices").value;
+        const gamesInput = document.getElementById("games-selector").value;
+        const streamInput = document.getElementById("stream-selector").value;
+        const workInput = document.getElementById("work-selector").value;
 
-    resultPara.innerHTML = "result";
+        internetInputs = [gamesInput, streamInput, workInput];
+        userScore = 0;
+
+        for (let i = 0; i < internetInputs.length; i++) {
+            if (internetInputs[i] === "Yes") {
+                userScore += 1;
+            }
+        }
+
+        if (numDevices > 4) {
+            userScore += 3;
+        } else if (numDevices > 2) {
+            userScore += 2;
+        } else if (numDevices > 1) {
+            userScore += 1;
+        } 
+
+        if (userScore > 5) {
+            resultPara.innerHTML = "We recommend you get an internet plan with 1GB of download";
+        } else if (userScore > 3) {
+            resultPara.innerHTML = "We recommend you get an internet plan with 250mb of download";
+        } else if (userScore > 1) {
+            resultPara.innerHTML = "We recommend you get an internet plan with 100mb of download";
+        } else {
+            resultPara.innerHTML = "We recommend you get an internet plan with 50mb of download";
+        }
+    } else if (serviceType === "Phone/Cell") {
+        // get form values
+        const covType = document.getElementById("coverage-selector").value;
+        const dataInput = document.getElementById("data-selector").value;
+
+        if (covType === "Yes") {
+            if (dataInput === "Very Often") {
+                resultPara.innerHTML = "We recommend you get a cell plan that allows international calling and has 20GB of roaming data";
+            } else if (dataInput === "Somewhat Often") {
+                resultPara.innerHTML = "We recommend you get a cell plan that allows international calling and has 10GB of roaming data";
+            } else if (dataInput === "Rarely") {
+                resultPara.innerHTML = "We recommend you get a cell plan that allows international calling and has 5GB of roaming data";
+            }
+
+        } else {
+            if (dataInput === "Very Often") {
+                resultPara.innerHTML = "We recommend you get a cell plan that has 20GB of roaming data, you do not need to pay extra for international calling";
+            } else if (dataInput === "Somewhat Often") {
+                resultPara.innerHTML = "We recommend you get a cell plan that has 10GB of roaming data, you do not need to pay extra for international calling";
+            } else if (dataInput === "Rarely") {
+                resultPara.innerHTML = "We recommend you get a cell plan that has 5GB of roaming data, you do not need to pay extra for international calling";
+            }
+        } 
+    } else if (serviceType === "Lawncare") {
+        
+    }
 
     if (result.style.display === 'none') {
         result.style.display = 'block';    // SHOW the result
