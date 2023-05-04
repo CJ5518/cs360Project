@@ -28,7 +28,9 @@ function orderBox_mt:content()
 						span({class = "service-box-item", ["onclick"] = onclick}, str);
 					end)
 				end
+				field("ID: " .. tostring(self.OrderID))
 				field("From: " .. order:getVendor().CompanyName);
+				field("To: " .. order:getUser().Email);
 				local canSee = false;
 				if self.account then
 					if accounts.getAccountType(self) == "User" then

@@ -72,6 +72,12 @@ app:match("/request/:service_id", function(self)
 	return {render = "requestPage"}
 end)
 
+--Order page
+app:match("/order/:order_id", function(self)
+	self.order_id = self.params.order_id;
+	return {render = "orderSingularPage"}
+end)
+
 --Vendor page
 app:match("/vendor/:vendor_id", function(self)
 	self.vendor_id = self.params.vendor_id;

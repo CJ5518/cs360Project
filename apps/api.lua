@@ -339,6 +339,19 @@ app:post("order", "/order", function(self)
 	end
 end)
 
+app:post("acceptOrder", "/acceptOrder", function(self)
+	local orderID = self.POST.OrderID;
+	local order = Orders:find(orderID);
+	order:update({
+		OrderStateEnum = 2
+	})
+	return {status=200};
+end)
+
+app:delete("order", "/order", function(self)
+	local order = Orders:find(tonumber(self.POST.OrderID));
+	order:delete();
+end)
 
 
 return app;

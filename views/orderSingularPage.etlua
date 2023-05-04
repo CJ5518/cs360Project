@@ -1,0 +1,31 @@
+<% render("widgets.nav") %>
+
+<%
+--widget(require("widgets.serviceBox")({ServiceID = SERVICE_ID}))
+
+%>
+
+<h1>Order - <%=order_id%></h1>
+
+<%
+
+local db = require("lapis.db");
+local Orders = require("models.Orders");
+local order = Orders:find(order_id);
+
+if not account then
+	element("span", "Please log in to use this feature");
+elseif account.UserID then
+	element("p", "Order status: ", Orders:getStateEnumName(order.OrderStateEnum))
+	element("button", {onclick="cancelButtonClick(" .. tostring(order_id) .. ")"}, "Cancel Order")
+elseif account.VendorID then
+	element("p", "Order status: ", Orders:getStateEnumName(order.OrderStateEnum))
+	if tonumber(order.OrderStateEnum) == 1 then
+		element("button", {onclick="acceptButtonClick(" .. tostring(order_id) .. ")"}, "Accept Order")
+	end
+end
+
+
+%>
+
+<script src="/static/js/orderPageScript.js"></script>
