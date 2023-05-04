@@ -15,6 +15,7 @@ $("#submitButton").click(function() {
 			  },
 			success: function(result) {
 				console.log(result);
+				$("#resultsList").html(result.html);
 			}
 		})
 		

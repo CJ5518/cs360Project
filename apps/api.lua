@@ -11,6 +11,7 @@ local servicesHelper = require("helpers.services");
 local homesHelper = require("helpers.homes");
 local accounts = require("helpers.accounts");
 local getRandomString = require("helpers.randomString").getRandomString;
+local serviceBoxWidget = require("widgets.serviceBox"); 
 
 -- I don't think the top-level before filter worked, it might but it's whatever
 app:before_filter(function(self)
@@ -258,6 +259,13 @@ app:delete("services", "/services", function(self)
 end)
 
 
+--Render a service's html for us
+local function renderService(serviceID)
+	local service = Services:find(serviceID);
+	return serviceBoxWidget({ServiceID = serviceID}):render_to_string();
+end
+
+
 local comparisonIDToSymbol = {">","<","="};
 
 --Service search
@@ -273,12 +281,11 @@ app:get("serviceSearchAction", "/serviceSearchAction", function(self)
 		end
 	end
 	--Run the query
-	local query = "SELECT * FROM Services WHERE ";
-
-	if #fieldSearchInfo == 0 then query = "SELECT * FROM Services;"; end
+	local query = "SELECT ServiceID FROM Services WHERE ServiceTypeID = " .. db.escape_literal(serviceType) .. " ";
 
 	for i,v in pairs(fieldSearchInfo) do
 		local value = v[1];
+		query = query .. "AND ";
 		if tonumber(v[1]) then
 			query = query .. "CAST(Field" .. tostring(i) .. " AS INT) ";
 		else 
@@ -286,12 +293,22 @@ app:get("serviceSearchAction", "/serviceSearchAction", function(self)
 		end
 		query = query .. comparisonIDToSymbol[v[2]] .. " " .. tostring(db.escape_literal(value));
 	end
-	print(query);
+	local results = db.query(query);
+	local longHtml = "";
+	for i,v in ipairs(results) do
+		longHtml = longHtml .. renderService(v.ServiceID);
+	end
 
 	--Return a message
 	return {json = {
-		msg = query
+		html = longHtml,
+		query = query
+		--other = results[1].ServiceID
 	}}
 end)
+
+
+
+
 
 return app;

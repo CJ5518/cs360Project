@@ -4,6 +4,7 @@ local Services = require("models.Services");
 local servicesHelper = require("helpers.services");
 local servBox, servBox_mt = Widget:extend("servBox")
 
+--NEEDS ServiceID
 
 function servBox_mt:content()
 	div({class = "service-box"}, function()
@@ -31,7 +32,7 @@ function servBox_mt:content()
 					local elem = servicesHelper.typeFields[servicesHelper.types[service.ServiceTypeID]][q];
 					field(elem[1] .. ": " .. service["Field" .. tostring(q)]);
 				end
-				if self.account.VendorID == service.ServiceOwner then
+				if self.account and self.account.VendorID == service.ServiceOwner then
 					field(function() 
 						button({class = "service-box-button", onclick="serviceBoxDeleteButtonFunc(" .. tostring(self.ServiceID) .. ")"}, "Delete service");
 						button({class = "service-box-button", onclick="serviceBoxEditButtonFunc(" .. tostring(self.ServiceID) .. ")"}, "Edit service");
