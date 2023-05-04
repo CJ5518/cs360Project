@@ -308,7 +308,7 @@ app:get("serviceSearchAction", "/serviceSearchAction", function(self)
 	local results = db.query(query);
 	local longHtml = "";
 	for i,v in ipairs(results) do
-		longHtml = longHtml .. renderService(v.ServiceID);
+		longHtml = longHtml .. "<li>" .. renderService(v.ServiceID) .. "</li>";
 	end
 
 	--Return a message

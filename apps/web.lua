@@ -4,6 +4,7 @@ local app = lapis.Application();
 local db = require("lapis.db");
 local email = require("helpers.email");
 local Users = require("models.Users");
+local Services = require("models.Services");
 local accounts = require("helpers.accounts");
 
 --------------------------------------------------
@@ -157,8 +158,27 @@ app:get("editHomeInfo", "/editHomeInfo", function(self)
 	return {render = "editHomeInfo"};
 end)
 
+
 app:get("delet", "/delet", function(self)
-	
+	math.randomseed(os.time())
+	for q = 1, 100 do
+		local dataField = math.random(1,100) * 1000;
+		if math.random() < 0.3 then
+			dataField = "unlimited"
+		end
+
+		Services:create({
+			ServiceOwner = 5,
+			Name = "Robo internet 1_" .. tostring(q),
+			Description = "This is a description for Robo internet 1_" .. tostring(q),
+			PricePerUnit = math.random(20, 50),
+			PriceUnitID = 1,
+			ServiceTypeID = 1,
+			Field1 = math.random(1,100) * 100,
+			Field2 = dataField
+		})
+	end
+
 	return {
 		json = {
 			"hello"
