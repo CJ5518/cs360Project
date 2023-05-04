@@ -258,21 +258,39 @@ app:delete("services", "/services", function(self)
 end)
 
 
+local comparisonIDToSymbol = {">","<","="};
+
 --Service search
 app:get("serviceSearchAction", "/serviceSearchAction", function(self)
-	local POST = self.POST;
-	local serviceType = POST.serviceTypeSelect;
+	local POST = self.GET;
+	local serviceType = tonumber(POST.serviceTypeSelect);
 	--fieldSearchInfo[1] = {value, comparison id}
 	local fieldSearchInfo = {};
 	--Get the POST data into fieldSearchInfo
-	for q = 1, #servicesHelper.typeFields do
-		fieldSearchInfo[q] = {POST["Field" .. tostring(q)], POST["FieldComparison" .. tostring(q)]};
+	for q = 1, #servicesHelper.typeFields[servicesHelper.types[serviceType]] do
+		if POST["Field" .. tostring(q)] ~= "" then
+			fieldSearchInfo[q] = {POST["Field" .. tostring(q)], tonumber(POST["FieldComparison" .. tostring(q)])};
+		end
 	end
 	--Run the query
+	local query = "SELECT * FROM Services WHERE ";
+
+	if #fieldSearchInfo == 0 then query = "SELECT * FROM Services;"; end
+
+	for i,v in pairs(fieldSearchInfo) do
+		local value = v[1];
+		if tonumber(v[1]) then
+			query = query .. "CAST(Field" .. tostring(i) .. " AS INT) ";
+		else 
+			query = query .. "Field" .. tostring(i) .. " ";
+		end
+		query = query .. comparisonIDToSymbol[v[2]] .. " " .. tostring(db.escape_literal(value));
+	end
+	print(query);
 
 	--Return a message
 	return {json = {
-		msg = "Idk man got your message what cannae say"
+		msg = query
 	}}
 end)
 
