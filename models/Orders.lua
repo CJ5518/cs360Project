@@ -22,7 +22,7 @@ end
 function Orders_mt:getService()
 	return Services:find(self.ServiceID)
 end
-function Oders_mt:getState()
+function Orders_mt:getState()
 	return self.OrderStateEnum;
 end
 function Orders:getStateEnumName(id)

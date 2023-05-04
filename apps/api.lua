@@ -7,6 +7,7 @@ local Users = require("models.Users");
 local Vendors = require("models.Vendors");
 local Homes = require("models.Homes");
 local Services = require("models.Services");
+local Orders = require("models.Orders");
 local servicesHelper = require("helpers.services");
 local homesHelper = require("helpers.homes");
 local accounts = require("helpers.accounts");
@@ -318,7 +319,25 @@ app:get("serviceSearchAction", "/serviceSearchAction", function(self)
 	}}
 end)
 
+app:post("order", "/order", function(self)
+	local data = self.POST;
+	--If all the shit checks out
+	if data.HomeID and data.HomeID ~= "" and data.ServiceID and data.ServiceID ~= "" and data.UserID and data.UserID ~= "" then
+		local service = Services:find(data.ServiceID);
 
+		Orders:create({
+			VendorID = service.ServiceOwner,
+			UserID = data.UserID,
+			ServiceID = data.ServiceID,
+			HomeID = data.HomeID,
+			OrderStateEnum = 1
+		});
+	else
+		return {
+			status = 400
+		}
+	end
+end)
 
 
 

@@ -21,7 +21,7 @@ elseif account.VendorID then
 end
 
 for i, v in ipairs(orders) do
-	widget(require("widgets.serviceBox")({OrderID = v}))
+	widget(require("widgets.orderBox")({OrderID = v}))
 end
 
 %>

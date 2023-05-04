@@ -66,7 +66,13 @@ app:match("/service/:service_id", function(self)
 	return {render = "servicePage"}
 end)
 
---Service page
+--Request service page
+app:match("/request/:service_id", function(self)
+	self.service_id = self.params.service_id;
+	return {render = "requestPage"}
+end)
+
+--Vendor page
 app:match("/vendor/:vendor_id", function(self)
 	self.vendor_id = self.params.vendor_id;
 	return {render = "vendorPage"}

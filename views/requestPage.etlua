@@ -1,0 +1,31 @@
+<% render("widgets.nav") %>
+<%
+local Services = require("models.Services");
+local Vendors = require("models.Vendors");
+local servicesHelper = require("helpers.services");
+local service = Services:find(service_id);
+local owner = Vendors:find(service.ServiceOwner)
+local db = require("lapis.db");
+%>
+
+<h1>Request Service</h1>
+<p>Are you sure you want to request this service?</p>
+<%widget(require("widgets.serviceBox")({ServiceID = service_id}))%>
+
+<p>For the home at:</p>
+<select class="form-select" id="homeSelect">
+<%
+
+local homes = db.query("SELECT HomeID, Address FROM Homes WHERE HomeOwner = " .. account.UserID);
+
+for i,v in ipairs(homes) do
+	element("option", {value = tostring(i)}, v.Address);
+end
+
+%>
+</select>
+
+<button onclick="onRequestButtonClicked(<%=account.UserID%>, <%=service_id%>)">Request</button>
+
+<script src="/static/js/serviceBoxScript.js"></script>
+<script src="/static/js/requestPageScript.js"></script>

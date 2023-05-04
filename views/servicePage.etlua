@@ -10,7 +10,11 @@ local owner = Vendors:find(service.ServiceOwner)
 <h1><%=service.Name %></h1>
 <p><%=service.Description %></p>
 <a href="/vendor/<%=service.ServiceOwner%>" >Owner: <%=owner.CompanyName%></a>
+
+<p>PricePerUnit: <%=service.PricePerUnit %></p>
+<p>PriceUnit: <%=servicesHelper.priceUnits[service.PriceUnitID] %></p>
 <%
+
 for q = 1, #service:getTypeFields() do
 	local elem = service:getTypeFields()[q];
 	element("p", elem[1] .. ": " .. service:getField(q));
@@ -18,5 +22,5 @@ end
 
 %>
 
-<button>Purchase</button>
+<button onclick="window.location.href = '/request/' + <%=service_id%>">Request</button>
 

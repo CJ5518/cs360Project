@@ -13,11 +13,12 @@
     - [X] Service box improvements
     - [X] Service page improvements
 - [ ] Purchase functionality
+    - [ ] Individual order page
+    - [ ] Test vendors and orders, haven't checked yet
 
-- [ ] Service Search (Carson (trying to be realistic))
+- [X] Service Search (Carson (trying to be realistic))
 
 - [X] Service page pull from db
-- [ ] Fix forgot password (Carson)
 
 - [X] navigate from signup to login
 - [ ] better error message for making an account with the same email as an existing account
