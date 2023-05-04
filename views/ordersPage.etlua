@@ -7,3 +7,21 @@
 
 <h1>Orders</h1>
 
+<%
+
+local db = require("lapis.db");
+
+local orders = {};
+if not account then
+	element("span", "Please log in to use this feature");
+elseif account.UserID then
+	orders = db.query("SELECT OrderID FROM Orders WHERE UserID = " .. account.UserID);
+elseif account.VendorID then
+	orders = db.query("SELECT OrderID FROM Orders WHERE VendorID = " .. account.VendorID);
+end
+
+for i, v in ipairs(orders) do
+	widget(require("widgets.serviceBox")({OrderID = v}))
+end
+
+%>
