@@ -12,7 +12,10 @@ $("#submitButton").click(function() {
 			data : $('#serviceSearchForm').serialize(),
 			error: function(xhr, status, error) {
 				console.log(xhr.responseText);
-			  }
+			  },
+			success: function(result) {
+				console.log(result);
+			}
 		})
 		
 	}

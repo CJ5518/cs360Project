@@ -260,7 +260,20 @@ end)
 
 --Service search
 app:get("serviceSearchAction", "/serviceSearchAction", function(self)
-	
+	local POST = self.POST;
+	local serviceType = POST.serviceTypeSelect;
+	--fieldSearchInfo[1] = {value, comparison id}
+	local fieldSearchInfo = {};
+	--Get the POST data into fieldSearchInfo
+	for q = 1, #servicesHelper.typeFields do
+		fieldSearchInfo[q] = {POST["Field" .. tostring(q)], POST["FieldComparison" .. tostring(q)]};
+	end
+	--Run the query
+
+	--Return a message
+	return {json = {
+		msg = "Idk man got your message what cannae say"
+	}}
 end)
 
 return app;

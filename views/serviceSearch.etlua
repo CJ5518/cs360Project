@@ -95,10 +95,11 @@ end
 <button id="submitButton">Search</button>
 
 <h2>Results</h2>
-<ul class = "horizontal-list">
+<ul class = "horizontal-list" id="resultsList">
 
 <%   %>
 
+</ul>
 
 <script src="static/js/serviceBoxScript.js"></script>
 <script src = "static/js/serviceSearchScript.js"></script>
