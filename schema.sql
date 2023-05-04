@@ -59,6 +59,7 @@ CREATE TABLE Orders (
     UserID INTEGER,
     ServiceID INTEGER,
     HomeID INTEGER,
+    OrderStateEnum int,
     FOREIGN KEY(VendorID) REFERENCES Vendors(VendorID),
     FOREIGN KEY(UserID) REFERENCES Users(UserID),
     FOREIGN KEY(ServiceID) REFERENCES Services(ServiceID),
