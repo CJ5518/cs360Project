@@ -145,6 +145,15 @@ app:get("editHomeInfo", "/editHomeInfo", function(self)
 	return {render = "editHomeInfo"};
 end)
 
+app:get("delet", "/delet", function(self)
+	
+	return {
+		json = {
+			"hello"
+		}
+	}
+end)
+
 --A catch-all, probably not good for prod but easy for adding lots of new pages
 app:match("/*", function(self)
 	return {render = self.params.splat};

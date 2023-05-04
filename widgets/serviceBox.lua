@@ -28,6 +28,8 @@ function servBox_mt:content()
 						span({class = "service-box-item", ["onclick"] = onclick}, str);
 					end)
 				end
+				field("PricePerUnit: " .. service.PricePerUnit);
+				field("PriceUnit: " .. servicesHelper.priceUnits[service.PriceUnitID]);
 				for q = 1, #servicesHelper.typeFields[servicesHelper.types[service.ServiceTypeID]] do
 					local elem = servicesHelper.typeFields[servicesHelper.types[service.ServiceTypeID]][q];
 					field(elem[1] .. ": " .. service["Field" .. tostring(q)]);

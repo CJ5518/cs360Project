@@ -9,6 +9,9 @@ local service = {};
 %>
 <% render("widgets.nav") %>
 
+<h2>Service Search</h1>
+<p>Leave a field blank to ignore it</p>
+
 <form id="serviceSearchForm">
 
 <div class = "mb-3">
@@ -27,7 +30,57 @@ local service = {};
 		%>
 	</select>
 </div>
+
 <%
+--Basic items
+for q = 1, #servicesHelper.fieldsWithoutIDsOrGenerics do
+	local name, type = servicesHelper.fieldsWithoutIDsOrGenerics[q][1], servicesHelper.fieldsWithoutIDsOrGenerics[q][2];
+	local newFieldValue = "text";
+	if type == "int" then
+		newFieldValue = "number"
+	end
+	if name ~= "Description" then
+		element("div", {class = "mb-3"}, function()
+			element("label", {["for"] = name}, name);
+			element("input", {["type"] = newFieldValue, id=name, ["name"] = name, required = false, class="form-control", value = service[name], step="any"});
+			if name == "PricePerUnit" then
+				--The bits that remind me of the library search Where thing is >/</= to ___
+				element("div", {class="row g-3 align-items-center"}, function()
+					element("span", {class = "col-auto"}, "I'm looking for services with")
+					element("div", {class = "col-auto"}, function()
+						local nom = "PricePerUnitComparison"
+						element("select", {class = "form-select col-auto", id = nom, name=nom}, function()
+							element("option", {value = 1}, ">");
+							element("option", {value = 2}, "<");
+							element("option", {value = 3}, "=");
+						end)
+					end)
+					element("span", {class = "col-auto"}, "the above value")
+				end)
+			end
+		end)
+	end
+end
+%>
+	<div class = "mb-3">
+		<%element("label", {["for"] = "priceUnitSelect"}, "Price Unit");%>
+		<select name = "priceUnitSelect" id = "priceUnitSelect" class = "form-control" <%=GET.ServiceID and "disabled" or "" %>>
+			<% --Service price unit options
+				if not GET.ServiceID then
+					element("option", {value="0"}, "Any");
+					for q = 1, #servicesHelper.priceUnits do
+						element("option", {value=tostring(q)}, servicesHelper.priceUnits[q]);
+					end
+				else
+					local q = service.PriceUnitID;
+					element("option", {value=tostring(q)}, servicesHelper.priceUnits[q]);
+				end
+			%>
+		</select>
+	</div>
+<%
+
+
 --The special Fields[1-9]s of the service
 for q = 1, #servicesHelper.types do
 	element("div", {style = "display: none;", id = "serviceFieldDiv" .. tostring(q)}, function()

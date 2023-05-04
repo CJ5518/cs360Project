@@ -283,6 +283,17 @@ app:get("serviceSearchAction", "/serviceSearchAction", function(self)
 	--Run the query
 	local query = "SELECT ServiceID FROM Services WHERE ServiceTypeID = " .. db.escape_literal(serviceType) .. " ";
 
+	if POST.Name ~= "" then
+		query = query .. "AND INSTR(Name, " .. db.escape_literal(POST.Name) .. ") ";
+	end
+	if POST.PricePerUnit ~= "" then
+		local symbol = comparisonIDToSymbol[tonumber(POST.PricePerUnitComparison)];
+		query = query .. "AND PricePerUnit " ..symbol .. " " .. db.escape_literal(POST.PricePerUnit) .. " ";
+	end
+	if POST.priceUnitSelect ~= "" and POST.priceUnitSelect ~= "0" then
+		query = query .. "AND PriceUnitID = " .. db.escape_literal(POST.priceUnitSelect) .. " ";
+	end
+
 	for i,v in pairs(fieldSearchInfo) do
 		local value = v[1];
 		query = query .. "AND ";
