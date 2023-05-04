@@ -1,6 +1,38 @@
+<head>
+    <link rel="stylesheet" href="static/serviceCalc.css">
+</head>
+
 <% render("widgets.nav") %>
 <h1 id="afford-calc-header">Affordability Calculator</h1>
 
-Coming Soon
+<div>
+    <form id="service-select">
+        <label for="service-type">Select Service: </label>
+        <select id="service-selector" name="service-type">
+            <option name="internet">Internet</option>
+            <option name="phone">Phone/Cell</option>
+            <option name="lawn">Lawncare</option>
+            <option name="mortgage">Mortgage</option>
+            <option name="homeowners-insurance">Homeowners' Insurance</option>
+            <option name="auto-insurance">Auto Insurance</option>
+        </select>
+
+        <label for="pay">How much do you currently pay per month for this service?: </label>
+        <input id="pay" name="pay" type="number">
+
+        <label for="income">Annual Income: </label>
+        <input id="income" name="income" type="number">
+    </form>
+</div>
+
+<div id="calc-div">
+    <input id="calc" type="button" value="Calculate">
+</div>
+
+<div id="result-div">
+    <p id="result-para"></p>
+</div>
+
 
 <script src="static/js/serviceBoxScript.js"></script>
+<script src="static/js/affordCalc.js"></script>

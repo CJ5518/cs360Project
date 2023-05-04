@@ -1,7 +1,7 @@
 - [X] Service Calc (Cole)
     - [X] finish forms
     - [X] figure out what to return
-- [ ] Affordability Calc (Cole)
+- [X] Affordability Calc (Cole)
 
 
 - [X] Homes
