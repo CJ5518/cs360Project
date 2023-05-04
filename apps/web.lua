@@ -161,21 +161,57 @@ end)
 
 app:get("delet", "/delet", function(self)
 	math.randomseed(os.time())
-	for q = 1, 100 do
+	local function addInternet()
+		for q = 1, 100 do
+			local dataField = math.random(1,100) * 1000;
+			if math.random() < 0.3 then
+				dataField = "unlimited"
+			end
+	
+			Services:create({
+				ServiceOwner = 5,
+				Name = "Robo internet 1_" .. tostring(q),
+				Description = "This is a description for Robo internet 1_" .. tostring(q),
+				PricePerUnit = math.random(20, 50),
+				PriceUnitID = 1,
+				ServiceTypeID = 1,
+				Field1 = math.random(1,100) * 100,
+				Field2 = dataField
+			})
+		end
+	end
+
+	for q = 1, 200 do
 		local dataField = math.random(1,100) * 1000;
-		if math.random() < 0.3 then
+		if math.random() < 0.4 then
 			dataField = "unlimited"
+		end
+
+		local minutesField = math.random(1,100) * 1000;
+		if math.random() < 0.7 then
+			minutesField = "unlimited"
+		end
+
+		local messagesField = math.random(1,100) * 1000;
+		if math.random() < 0.7 then
+			messagesField = "unlimited"
+		end
+		local devicesField = math.random(1,10);
+		if math.random() < 0.05 then
+			devicesField = "unlimited"
 		end
 
 		Services:create({
 			ServiceOwner = 5,
-			Name = "Robo internet 1_" .. tostring(q),
-			Description = "This is a description for Robo internet 1_" .. tostring(q),
-			PricePerUnit = math.random(20, 50),
+			Name = "Robo cell plan 1_" .. tostring(q),
+			Description = "This is a description for Robo cell plan 1_" .. tostring(q),
+			PricePerUnit = math.random(10, 100),
 			PriceUnitID = 1,
-			ServiceTypeID = 1,
-			Field1 = math.random(1,100) * 100,
-			Field2 = dataField
+			ServiceTypeID = 2,
+			Field1 = dataField,
+			Field2 = minutesField,
+			Field3 = messagesField,
+			Field4 = devicesField
 		})
 	end
 

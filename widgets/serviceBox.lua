@@ -17,11 +17,11 @@ function servBox_mt:content()
 				--button({class = "service-box-button", onclick="homeBoxDeleteButtonFunc(" .. tostring(self.HomeID) .. ")"}, "Delete home");
 				--button({class = "service-box-button", onclick="homeBoxEditButtonFunc(" .. tostring(self.HomeID) .. ")"}, "Edit home");
 				li(function() 
-					span({class = "service-box-title service-box-item", onclick="location.href='service/" .. tostring(self.ServiceID) .. "'"}, service.Name)
+					span({class = "service-box-title service-box-item", onclick="location.href='/service/" .. tostring(self.ServiceID) .. "'"}, service.Name)
 				end)
 				local function field(str, noClick)
 					li(function ()
-						local onclick="location.href='service/" .. tostring(self.ServiceID) .. "'";
+						local onclick="location.href='/service/" .. tostring(self.ServiceID) .. "'";
 						if noClick then
 							onclick = false;
 						end
