@@ -130,7 +130,7 @@
 
     <form id="auto-insurance-form" class="service-calc-form">
         <label for="year">When was your vehicle made?: </label>
-        <input name="year" type="number" min="0">
+        <input id="car-year" name="year" type="number" min="0">
 
         <label for="make">What is your vehicle make?: </label>
         <input name="make" type="text">
@@ -151,7 +151,7 @@
         </select>
 
         <label for="credit">What is your credit score?: </label>
-        <input name="credit" type="number" min="0">
+        <input id="car-credit" name="credit" type="number" min="0">
 
     </form>
     

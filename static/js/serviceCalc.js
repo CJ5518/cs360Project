@@ -246,9 +246,56 @@ function calculateService(serviceType) {
     } else if (serviceType === "Homeowners' Insurance") {
         const ownRent = document.getElementById("own-rent-selector").value;
         const credit = document.getElementById("HO-credit").value;
-
+        const age = document.getElementById("age-selector").value;
         
+        if (ownRent === "Own") {
+            resultPara.innerHTML = "You need homeowner's insurance. ";
+        } else {
+            resultPara.innerHTML = "You need renter's insurance. ";
+        }
 
+        if (credit < 670) {
+            resultPara.innerHTML += "Your credit is poor, expect higher rates. ";
+        } else {
+            resultPara.innerHTML += "Your credit is good, look for low rates. ";
+        }
+
+        if (age === "New") {
+            resultPara.innerHTML += "Your property is new, look for the lowest rates.";
+        } else if (age === "1-10 Years") {
+            resultPara.innerHTML += "Your property is newer, look for lower rates.";
+        } else if (age === "11-20 Years") {
+            resultPara.innerHTML += "Your property is an average age, expect normal rates.";
+        } else if (age === "21-50 Years") { 
+            resultPara.innerHTML += "Your property is older, expect higher rates.";
+        } else if (age === "Over 50 Years") {
+            resultPara.innerHTML += "Your property is old, expect high rates.";
+        }
+    } else if (serviceType === "Auto Insurance") {
+        const license = document.getElementById("license-selector").value;
+        const carYear = document.getElementById("car-year").value;
+        const carCredit = document.getElementById("car-credit").value;
+
+        if (license === "No") {
+            resultPara.innerHTML = "You need to renew your license";
+        } else {
+
+            if (carYear > 2020) {
+                resultPara.innerHTML = "Your car is new, look for lowest rates. ";
+            } else if (carCredit > 2015) {
+                resultPara.innerHTML = "Your car is fairly new, look for lower rates. ";
+            } else if (carCredit > 2005) {
+                resultPara.innerHTML = "Your car is a little older, expect average rates. ";
+            } else {
+                resultPara.innerHTML = "Your car is old, expect higher rates. ";
+            }
+
+            if (carCredit < 670) {
+                resultPara.innerHTML += "Your credit is poor, expect higher rates.";
+            } else {
+                resultPara.innerHTML += "Your credit is good, expect lower rates.";
+            }
+        }
     }
 
     if (result.style.display === 'none') {

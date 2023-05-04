@@ -1,7 +1,6 @@
-- [ ] Service Calc (Cole)
+- [X] Service Calc (Cole)
     - [X] finish forms
-    - [ ] css (looks bad rn)
-    - [ ] figure out what to return
+    - [X] figure out what to return
 - [ ] Affordability Calc (Cole)
 
 
