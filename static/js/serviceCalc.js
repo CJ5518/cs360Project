@@ -120,6 +120,7 @@ function showForm(serviceType) {
 //calculate function
 function calculateService(serviceType) {
     const resultPara = document.getElementById("result-para");   // get result paragraph
+    userScore = 0;   // user score for calculation
     
     if (serviceType === "Internet") {
         // get form values
@@ -129,7 +130,6 @@ function calculateService(serviceType) {
         const workInput = document.getElementById("work-selector").value;
 
         internetInputs = [gamesInput, streamInput, workInput];
-        userScore = 0;
 
         for (let i = 0; i < internetInputs.length; i++) {
             if (internetInputs[i] === "Yes") {
@@ -154,6 +154,9 @@ function calculateService(serviceType) {
         } else {
             resultPara.innerHTML = "We recommend you get an internet plan with 50mb of download";
         }
+
+        userScore = 0;  // reset userScore
+
     } else if (serviceType === "Phone/Cell") {
         // get form values
         const covType = document.getElementById("coverage-selector").value;
@@ -178,7 +181,74 @@ function calculateService(serviceType) {
             }
         } 
     } else if (serviceType === "Lawncare") {
+        const sqFeet = document.getElementById("sq-feet").value;
+        const freqInput = document.getElementById("last-work-selector").value;
+
+        //  sq feet calc
+        if (Number(sqFeet) > 70000) {
+            userScore += 3;
+        } else if (Number(sqFeet) > 50,000) {
+            userScore += 2;
+        } else if (Number(sqFeet) > 30,000) {
+            userScore += 1;
+        } else if (Number(sqFeet) > 15,000) {
+            userScore += 0;
+        } else if (Number(sqFeet) < 10,000) {
+            userScore -= 1;
+        }
+
+        //  freq calc
+        if (freqInput === "More Than 4 Weeks Ago") {
+            userScore += 3;
+        } else if (freqInput === "2-4 Weeks Ago") {
+            userScore += 2;
+        } else if (freqInput === "Less Than 2 Weeks Ago") {
+            userScore += 1;
+        } 
+
+        //  user score calc
+        if (userScore > 5) {
+            resultPara.innerHTML = "look for a more professional service that has multiple workers and lots of equipment";
+        } else if (userScore > 3) {
+            resultPara.innerHTML = "try to find a moderatly professional service with two or more workers and decent equipment";
+        } else if (userScore > 1) {
+            resultPara.innerHTML = "look for a cheap service, one person and minimal equipment should do the trick";
+        } else {
+            resultPara.innerHTML = "hire the nieghbor's kid";
+        }
+
+        userScore = 0;
+    } else if (serviceType === "Mortgage") {
+        const homePrice = document.getElementById("home-price").value;
+        const downPayment = document.getElementById("down-payment").value;
+        const credit = document.getElementById("credit").value;
+        const term = document.getElementById("term-selector").value;
+
+        remainingPayment = homePrice - downPayment;
+
+        if(remainingPayment < 0) {
+            resultPara.innerHTML = "your downpayment cannot be more than your home price"
+        } else {
+            if (term === "ASAP") {
+                resultPara.innerHTML = "You want to pay off your house ASAP, go for a 10 year term.";
+            } else if (term === "I can wait a medium amount of time") {
+                resultPara.innerHTML = "You want to pay off your house in a medium amount of time, go for a 15 or 20 year term.";
+            } else if (term === "I can wait a long time") {
+                resultPara.innerHTML = "You can wait a long time, go for a 30 year term.";
+            }
+
+            if (credit > 670) {
+                resultPara.innerHTML += " Your credit is good, look for low loan fees and interest rates";
+            } else {
+                resultPara.innerHTML += " Your credit is poor, expect higher loan fees and interest rates";
+            }
+        }
+    } else if (serviceType === "Homeowners' Insurance") {
+        const ownRent = document.getElementById("own-rent-selector").value;
+        const credit = document.getElementById("HO-credit").value;
+
         
+
     }
 
     if (result.style.display === 'none') {

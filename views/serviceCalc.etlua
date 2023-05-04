@@ -63,7 +63,7 @@
 
     <form id="lawn-form" class="service-calc-form">
         <label for="sq-feet">How big is your yard? (square feet): </label>
-        <input name="sq-feet" type="number" min="0">
+        <input id="sq-feet" name="sq-feet" type="number" min="0">
 
         <label for="last">When was the last time work was done on your yard?: </label>
         <select id="last-work-selector" name="last">
@@ -75,20 +75,19 @@
 
     <form id="mortgage-form" class="service-calc-form">
         <label for="price">How much did you buy your home for?: </label>
-        <input name="price" type="number" min="0">
+        <input id="home-price" name="price" type="number" min="0">
 
         <label for="down">How much did you put down?: </label>
-        <input name="down" type="number" min="0">
+        <input id="down-payment" name="down" type="number" min="0">
 
         <label for="credit">What is your credit score?: </label>
-        <input name="credit" type="number" min="0">
+        <input id="credit" name="credit" type="number" min="0">
 
-        <label for="term">What is your desired term length?: </label>
+        <label for="term">How soon do you want it paid off?: </label>
         <select id="term-selector" name="term">
-            <option name="10">10 Years</option>
-            <option name="15">15 Years</option>
-            <option name="20">20 Years</option>
-            <option name="30">30 Years</option>
+            <option name="soon">ASAP</option>
+            <option name="awhile">I can wait a medium amount of time</option>
+            <option name="long">I can wait a long time</option>
         </select>
     </form>
 
@@ -126,7 +125,7 @@
         </select>
 
         <label for="credit">What is your credit score?: </label>
-        <input name="credit" type="number" min="0">
+        <input id="HO-credit" name="credit" type="number" min="0">
     </form>
 
     <form id="auto-insurance-form" class="service-calc-form">
